@@ -1,0 +1,67 @@
+body, html {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    height: 100%;
+    width: 200px;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    background-color: #333; 
+    padding-top: 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+
+.navbar img {
+    width: 150px; 
+    margin-bottom: 20px; 
+}
+
+.plant-container {
+    display: grid;
+    grid-template-columns: 270px 270px 270px 270px 270px;
+    margin-left: 215px;
+    padding: 20px;
+    gap: 10px;
+    width: 150px;    
+}
+
+.plant-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.card p, h3{
+    font-size: medium;
+    text-align: center;
+}
+
+.main-content {
+    flex: 1 0 auto;
+    margin-left: 220px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    bottom: 0;
+    flex-shrink: 0;
+}
