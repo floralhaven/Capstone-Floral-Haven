@@ -26,6 +26,16 @@ body, html {
     margin-bottom: 20px; 
 }
 
+.message{
+    margin-left: 630px;
+    text-align: center;
+    width:500px;
+    height:500px;
+    margin-top: 30vh;
+    margin-bottom: 20vh;
+    font-size: large;
+}
+
 .plant-container {
     display: grid;
     grid-template-columns: 270px 270px 270px 270px 270px;
@@ -63,5 +73,14 @@ footer {
     padding: 10px 0;
     width: 100%;
     bottom: 0;
+    flex-shrink: 0;
+}
+
+.non-infofooter{
+    background-color: #333;
+    color: white;
+    text-align: center;
+    margin-left: 200px;
+    width: 88%;
     flex-shrink: 0;
 }
