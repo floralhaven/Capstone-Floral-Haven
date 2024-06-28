@@ -35,10 +35,12 @@
         <h2>Contact Us</h2>
         <form id="contact-form" action="https://formspree.io/f/movaagnl" method="post">
             <label for="email">Email</label>
-            <input type="text" id="email" class="email" required>
+            <input type="email" id="email" name="_replyto" required>
+
+            <lable for="subject">Subject</lable>
+            <input name="subject" id="subject">
 
             <p>Example: <br>
-                Subject - Questions about -plant name- <br>
                 Name - Jade <br>
                 Message - Hi I was curious about the Blazing star flower...
             </p>
