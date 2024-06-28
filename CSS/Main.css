@@ -67,9 +67,9 @@ body, html {
 
 .contact-form {
     max-width: 600px;
-    margin-top: 200px;
+    margin-top: 161px;
     margin-left: 550px;
-    margin-bottom: 174px;
+    margin-bottom: 161px;
     padding: 30px;
     background: #fff;
     border-radius: 8px;
@@ -85,7 +85,6 @@ body, html {
 .contact-form label {
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
 }
 
 .contact-form input, .contact-form textarea {
