@@ -152,6 +152,49 @@ body, html {
     background-color: #218838;
 }
 
+.login-form{
+    max-width: 350px;
+    margin-top: 250px;
+    margin-left: 730px;
+    margin-bottom: 251px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: large;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-form input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #272001;
+    border-radius: 5px;
+}
+
+.login-form button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid #272001;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 130px;
+}
+
+.login-form button:hover {
+    background-color: #218838;
+}
 footer {
     background-color: #333;
     color: white;
