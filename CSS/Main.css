@@ -1,48 +1,63 @@
-body, html {
+body,
+html {
     height: 100%;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
     padding: 0;
+    background-color: #DCDCDC;
 }
 
 .navbar {
     height: 100%;
     width: 200px;
-    position: fixed; 
+    position: fixed;
     top: 0;
     left: 0;
-    background-color: #333; 
-    padding-top: 20px; 
+    background-color: #6F9479;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
+    border-right: 2px solid #272001;
 }
 
 .navbar img {
-    width: 150px; 
-    margin-bottom: 20px; 
+    width: 150px;
+    margin-bottom: 20px;
 }
 
 .navbar button {
     width: 150px;
     height: 50px;
-    margin-top:20px;
+    margin-top: 20px;
     border: 2px solid #272001;
     font-size: 20px;
     background-color: #646536;
-    color:#DCDCDC;
+    color: #DCDCDC;
 }
 
-.message{
-    margin-left: 630px;
+.message {
+
     text-align: center;
-    width:500px;
-    height:500px;
-    margin-top: 30vh;
-    margin-bottom: 20vh;
-    font-size: large;
+    width: 700px;
+    height: 600px;
+    margin-top: 10.5vh;
+    margin-bottom: 10.2vh;
+    margin-left: 60vh;
+    padding: 18px;
+    padding-top: 40px;
+    font-size: 33px;
+    background-color: #6F9479;
+    border: 2px solid #272001;
+    color: #DCDCDC;
+    text-align: center;
+}
+
+.message h1 {
+    font-size: 54px;
+    font-weight: bold;
 }
 
 .plant-container {
@@ -51,23 +66,16 @@ body, html {
     margin-left: 215px;
     padding: 20px;
     gap: 10px;
-    width: 150px;    
-}
-
-.plant-container > div {
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
+    width: 150px;
 }
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding-left: 10px;
     padding-right: 10px;
-}
-
-.card p, h3{
-    font-size: medium;
+    background-color: #6F9479;
     text-align: center;
+    font-size: medium;
 }
 
 .main-content {
@@ -96,8 +104,9 @@ body, html {
     margin-bottom: 5px;
 }
 
-.contact-form input, .contact-form textarea {
-    width: 100%;
+.contact-form input,
+.contact-form textarea {
+    width: 95%;
     padding: 10px;
     margin-bottom: 15px;
     border: 2px solid #272001;
@@ -105,7 +114,7 @@ body, html {
 }
 
 .contact-form button {
-    background-color: #28a745;
+    background-color: #646536;
     color: white;
     padding: 10px 20px;
     border: 2px solid #272001;
@@ -118,7 +127,7 @@ body, html {
     background-color: #218838;
 }
 
-.signup-form{
+.signup-form {
     max-width: 350px;
     margin-top: 227px;
     margin-left: 730px;
@@ -162,7 +171,7 @@ body, html {
     background-color: #218838;
 }
 
-.login-form{
+.login-form {
     max-width: 350px;
     margin-top: 250px;
     margin-left: 730px;
@@ -206,11 +215,11 @@ body, html {
     background-color: #218838;
 }
 
-.profile{
+.profile {
     display: flex;
     flex-direction: column;
-    width:600px;
-    height:600px;
+    width: 600px;
+    height: 600px;
     margin-left: 600px;
     margin-top: 125px;
     margin-bottom: 126px;
@@ -219,12 +228,12 @@ body, html {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile h1{
+.profile h1 {
     text-align: center;
     font-size: 48px;
 }
 
-.comingsoon{
+.comingsoon {
     border: 2px solid #272001;
     width: 99.5%;
     font-size: 44px;
@@ -232,51 +241,56 @@ body, html {
     margin-top: 10px;
 }
 
-.comingsoon h2{
+.comingsoon h2 {
     padding: 20px;
     transform: rotate(-20deg);
 }
 
-.passwordchanger{
-    width:200px;
-    height:150px;
+.passwordchanger {
+    width: 200px;
+    height: 150px;
     border: 2px solid #272001;
     float: left;
     margin-top: 57px;
     padding: 5px;
 }
 
-.passwordchanger input, label {
+.passwordchanger input,
+label {
     margin: 5px;
 }
 
-.passwordchanger button{
+.passwordchanger button {
     margin-left: 20px;
     margin-top: 20px;
     width: 150px;
 }
 
-.logoutbtn{
+.logoutbtn {
     width: 100px;
     height: 400px;
     margin-left: 250px;
 }
 
 footer {
-    background-color: #333;
+    background-color: #6F9479;
     color: white;
     text-align: center;
+    margin-left: 21.5vh;
     padding: 10px 0;
-    width: 100%;
+    width: 87.89%;
     bottom: 0;
     flex-shrink: 0;
+    border-top:#272001 2px solid;
 }
 
-.non-infofooter{
-    background-color: #333;
+.non-infofooter {
+    background-color: #6F9479;
     color: white;
-    text-align: center;
-    margin-left: 200px;
+    text-align: left;
     width: 88%;
-    flex-shrink: 0;
+}
+
+.non-infofooter p {
+    padding-left: 5px;
 }
