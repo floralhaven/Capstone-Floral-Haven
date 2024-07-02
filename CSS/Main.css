@@ -25,10 +25,10 @@ html {
 
 .navbar img {
     width: 150px;
-    margin-bottom: 20px;
+    border: 2px solid #272001;
 }
 
-.navbar button {
+.btn {
     width: 150px;
     height: 50px;
     margin-top: 20px;
@@ -38,14 +38,18 @@ html {
     color: #DCDCDC;
 }
 
-.message {
+button{
+    padding: 0;
+    width:160px;
+}
 
+.message {
     text-align: center;
     width: 700px;
     height: 600px;
     margin-top: 10.5vh;
     margin-bottom: 10.2vh;
-    margin-left: 60vh;
+    margin-left: 30%;
     padding: 18px;
     padding-top: 40px;
     font-size: 33px;
@@ -63,7 +67,7 @@ html {
 .plant-container {
     display: grid;
     grid-template-columns: 270px 270px 270px 270px 270px;
-    margin-left: 215px;
+    margin-left: 30%;
     padding: 20px;
     gap: 10px;
     width: 150px;
@@ -86,7 +90,7 @@ html {
 .contact-form {
     max-width: 600px;
     margin-top: 140px;
-    margin-left: 550px;
+    margin-left: 30%;
     margin-bottom: 138px;
     padding: 10px;
     background: #6F9479;
@@ -112,7 +116,7 @@ html {
     padding: 10px;
     margin-bottom: 14px;
     border: 2px solid #272001;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
 .contact-form button {
@@ -120,9 +124,9 @@ html {
     color: white;
     padding: 10px 20px;
     border: 2px solid #272001;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-    margin-left: 245px;
+    margin-left: 30%;
 }
 
 .contact-form button:hover {
@@ -132,7 +136,7 @@ html {
 .signup-form {
     max-width: 350px;
     margin-top: 210px;
-    margin-left: 730px;
+    margin-left: 30%;
     margin-bottom: 209px;
     padding: 10px;
     background: #6F9479;
@@ -157,7 +161,7 @@ html {
     padding: 10px;
     margin-bottom: 10px;
     border: 2px solid #272001;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
 .signup-form button {
@@ -165,9 +169,9 @@ html {
     color: white;
     padding: 10px 20px;
     border: 2px solid #272001;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-    margin-left: 130px;
+    margin-left: 30%;
 }
 
 .signup-form button:hover {
@@ -177,13 +181,15 @@ html {
 .login-form {
     max-width: 350px;
     margin-top: 250px;
-    margin-left: 730px;
-    margin-bottom: 251px;
+    margin-left: 45%;
+    margin-bottom: 240px;
     padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #6F9479;
+    border-radius: 20px;
+    border: #272001 2px solid;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     font-size: large;
+    color:#DCDCDC
 }
 
 .login-form h2 {
@@ -201,21 +207,21 @@ html {
     padding: 10px;
     margin-bottom: 15px;
     border: 2px solid #272001;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
 .login-form button {
-    background-color: #28a745;
+    background-color: #646536;
     color: white;
     padding: 10px 20px;
     border: 2px solid #272001;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-    margin-left: 130px;
+    margin-left: 30%;
 }
 
 .login-form button:hover {
-    background-color: #218838;
+    background-color: #818262;
 }
 
 .profile {
@@ -223,17 +229,25 @@ html {
     flex-direction: column;
     width: 600px;
     height: 600px;
-    margin-left: 600px;
+    margin-left: 35%;
     margin-top: 125px;
-    margin-bottom: 126px;
-    background: #fff;
+    margin-bottom: 124px;
+    background: #6F9479;
     border: 2px solid #272001;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #DCDCDC;
 }
 
 .profile h1 {
     text-align: center;
     font-size: 48px;
+}
+
+.profile button {
+    background-color: #646536;
+    border: 2px solid #272001;
+    color:#DCDCDC;
+    height: 40px;
 }
 
 .comingsoon {
@@ -251,10 +265,10 @@ html {
 
 .passwordchanger {
     width: 200px;
-    height: 150px;
+    height: 190px;
     border: 2px solid #272001;
     float: left;
-    margin-top: 57px;
+    margin-top: 10px;
     padding: 5px;
 }
 
@@ -279,7 +293,7 @@ footer {
     background-color: #6F9479;
     color: white;
     text-align: center;
-    margin-left: 21.5vh;
+    margin-left: 12%;
     padding: 10px 0;
     width: 87.89%;
     bottom: 0;
