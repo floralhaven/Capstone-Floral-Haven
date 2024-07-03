@@ -188,6 +188,126 @@ function fetchData(category) {
                       image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Cosmos_bipinnatus_pink%2C_Burdwan%2C_West_Bengal%2C_India_10_01_2013.jpg/330px-Cosmos_bipinnatus_pink%2C_Burdwan%2C_West_Bengal%2C_India_10_01_2013.jpg",
                       safety: { cats: "Not Safe", dogs: "Safe" }
                     },
+                    {
+                      commonName: "Honeywort 'Kiwi Blue'",
+                      scientificName: "Cerinthe Major 'Purpurascens'",
+                      image: "https://www.swallowtailgardenseeds.com/flowers/honeyworts/honeywort.jpeg",
+                      safety: { cats: "Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Tenweeks Stock",
+                      scientificName: "Matthiola incana",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/2006-12-01Matthiola05.jpg/1920px-2006-12-01Matthiola05.jpg",
+                      safety: { cats: "Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Sunflower",
+                      scientificName: "Helianthus annuus",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Sunflower_sky_backdrop.jpg/1200px-Sunflower_sky_backdrop.jpg",
+                      safety: { cats: "Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Anise",
+                      scientificName: "Pimpinella anisum",
+                      image: "https://www.ufseeds.com/on/demandware.static/-/Sites-master-urbanfarmer/default/dwe4f23339/images/products/Pimpinella-anisum_flower.jpg",
+                      safety: { cats: "Safe", dogs: "Moderately Safe" }
+                    },
+                    {
+                      commonName: "Bee Balm",
+                      scientificName: "Citriodora-Hybr",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Monarda_didyma_00.jpg/330px-Monarda_didyma_00.jpg",
+                      safety: { cats: "Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Starflower",
+                      scientificName: "Borage officinalis",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Borage_starflower_Rohtopurasruoho_01.jpg/330px-Borage_starflower_Rohtopurasruoho_01.jpg",
+                      safety: { cats: "Not Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Catnip",
+                      scientificName: "Nepeta cataria",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Starr_070906-8819_Nepeta_cataria.jpg/288px-Starr_070906-8819_Nepeta_cataria.jpg",
+                      safety: { cats: "Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Chives",
+                      scientificName: "Allium schoenoprasum",
+                      image: "https://images.immediate.co.uk/production/volatile/sites/10/2018/02/f0025e27-292d-4ed5-a50b-3db1f2707722-d2ac6fa.jpg?quality=90",
+                      safety: { cats: "Not Safe", dogs: "Not Safe" }
+                    },
+                    {
+                      commonName: "Clary Sage",
+                      scientificName: "Salvia sclarea",
+                      image: "https://www.ufseeds.com/on/demandware.static/-/Sites-master-urbanfarmer/default/dwe4f23339/images/products/Pimpinella-anisum_flower.jpg",
+                      safety: { cats: "Not Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Hyssop",
+                      scientificName: "Hyssopus officinalis",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Hyssopus_officinalis_001.JPG/247px-Hyssopus_officinalis_001.JPG",
+                      safety: { cats: "Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Lemon Balm",
+                      scientificName: "Melissa Officinalis",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Lemon_balm_plant.jpg/330px-Lemon_balm_plant.jpg",
+                      safety: { cats: "Safe", dogs: "Moderately Safe" }
+                    },
+                    {
+                      commonName: "Greek Oregano",
+                      scientificName: "Origanum vulgare",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Majorana_syriaca_-_za%27atar.jpg/1280px-Majorana_syriaca_-_za%27atar.jpg",
+                      safety: { cats: "Not Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Rosemary",
+                      scientificName: "Salvia rosmarinus",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Rosemary_in_bloom.JPG/330px-Rosemary_in_bloom.JPG",
+                      safety: { cats: "Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Valerian",
+                      scientificName: "Valeriana officinalis",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Valeriana_officinalis_-_Niitvälja.jpg/330px-Valeriana_officinalis_-_Niitvälja.jpg",
+                      safety: { cats: "Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Ivy",
+                      scientificName: "Hedera helix",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Hedera_helix_Dover.jpg/330px-Hedera_helix_Dover.jpg",
+                      safety: { cats: "Not Safe", dogs: "Not Safe" }
+                    },
+                    {
+                      commonName: "Ice plant",
+                      scientificName: "Delosperma cooperi",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Delosperma_Cooperi.jpg/330px-Delosperma_Cooperi.jpg",
+                      safety: { cats: "Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Garlic mustard",
+                      scientificName: "Alliaria petiolata",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Rosemary_in_bloom.JPG/330px-Rosemary_in_bloom.JPG",
+                      safety: { cats: "Moderately Safe", dogs: "Moderately Safe" }
+                    },
+                    {
+                      commonName: "White Clovers",
+                      scientificName: "Trifolium repens",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Valeriana_officinalis_-_Niitvälja.jpg/330px-Valeriana_officinalis_-_Niitvälja.jpg",
+                      safety: { cats: "Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "White Deadnettle",
+                      scientificName: "Lamium album",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Hedera_helix_Dover.jpg/330px-Hedera_helix_Dover.jpg",
+                      safety: { cats: "Safe", dogs: "Safe" }
+                    },
+                    {
+                      commonName: "Bluebeard",
+                      scientificName: "Caryopteris",
+                      image: "https://upload.wikimedia.org/wikipedia/commons/b/be/Caryopteris_incana_4.JPG",
+                      safety: { cats: "Safe", dogs: "Safe" }
+                    },
       ]
     };
     return new Promise((resolve) => {
