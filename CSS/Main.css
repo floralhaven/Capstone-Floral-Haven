@@ -70,21 +70,27 @@ button{
 
 .plant-container {
     display: grid;
-    grid-template-columns: 270px 270px 270px 270px 270px;
-    margin-left: 13%;
-    padding: 20px;
-    gap: 10px;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    margin-left: 18.5%;
+    padding: 10px;
+    gap: 50px;
     width: 150px;
 }
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding-left: 10px;
-    padding-right: 10px;
     background-color: #6F9479;
     text-align: center;
     font-size: 18px;
     border: 2px solid #272001;
+    width: 25vh;
+    height: 40vh;
+}
+
+.card img{
+ height:40%;
+ width: 60%;
+ margin-top: 10px;
 }
 
 .main-content {
