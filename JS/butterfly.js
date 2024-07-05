@@ -7,7 +7,85 @@ document.addEventListener('DOMContentLoaded', () => {
 function fetchData(category) {
   // Hardcoded data for now will replace with connection to a SQL db
   const data = {
-    bats: [
+    butterfly: [
+      {
+        commonName: "Zinnia",
+        scientificName: "Zinnia spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Zinnia_single_layer_and_12_Petals_2.jpg/330px-Zinnia_single_layer_and_12_Petals_2.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Cosmos",
+        scientificName: "Cosmos bipinnatus",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Cosmos_bipinnatus_pink%2C_Burdwan%2C_West_Bengal%2C_India_10_01_2013.jpg/330px-Cosmos_bipinnatus_pink%2C_Burdwan%2C_West_Bengal%2C_India_10_01_2013.jpg",
+        safety: { cats: "Not Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "French Marigolds",
+        scientificName: "Tagetes patula",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/French_marigold_Tagetes_patula.jpg/330px-French_marigold_Tagetes_patula.jpg",
+        safety: { cats: "Not Safe", dogs: "Not Safe" }
+      },
+      {
+        commonName: "Snapdragon",
+        scientificName: "Antirrhinum majus",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Antirrhinum_majus_from_Thasos.JPG/330px-Antirrhinum_majus_from_Thasos.JPG",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Lantana",
+        scientificName: "Lantana camara",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/LantanaFlowerLeaves.jpg/330px-LantanaFlowerLeaves.jpg",
+        safety: { cats: "Not Safe", dogs: "Not Safe" }
+      },
+      {
+        commonName: "Verbena",
+        scientificName: "Verbena spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Verbena_bonariensis1.jpg/330px-Verbena_bonariensis1.jpg",
+        safety: { cats: "Not Safe", dogs: "Not Safe" }
+      },
+      {
+        commonName: "Petunia",
+        scientificName: "Petunia spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Petunia_exserta_by_Scott_Zona_-_004_%281%29.jpg/330px-Petunia_exserta_by_Scott_Zona_-_004_%281%29.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Sunflower",
+        scientificName: "Helianthus annuus",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Sunflower_sky_backdrop.jpg/1200px-Sunflower_sky_backdrop.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Impatiens",
+        scientificName: "Impatiens spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Impatiens_scapiflora.jpg/330px-Impatiens_scapiflora.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Calendula",
+        scientificName: "Calendula officinalis",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Calendula_January_2008-1_filtered.jpg/330px-Calendula_January_2008-1_filtered.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Sweet Alyssum",
+        scientificName: "Lobularia maritima",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Smagliczka_nadmorska_1.jpg/330px-Smagliczka_nadmorska_1.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Monk's Cress",
+        scientificName: "Tropaeolum majus",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Tropaeolum_majus_2005_G1.jpg/330px-Tropaeolum_majus_2005_G1.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Butterfly bush",
+        scientificName: "Buddleja spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Buddleja_crispa_var._agathosma.jpg/330px-Buddleja_crispa_var._agathosma.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
       {
         commonName: "Purple Coneflower",
         scientificName: "Echinacea purpurea",
@@ -15,9 +93,39 @@ function fetchData(category) {
         safety: { cats: "Safe", dogs: "Safe" }
       },
       {
-        commonName: "Goldenrod",
-        scientificName: "Solidago canadensis",
-        image: "https://upload.wikimedia.org/wikipedia/commons/e/e2/Solidago_nemoralis.jpg",
+        commonName: "Butterfly Weed",
+        scientificName: "Asclepias curassavica",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Asclepias_tuberosa_interior.jpg/330px-Asclepias_tuberosa_interior.jpg",
+        safety: { cats: "Not Safe", dogs: "Not Safe" }
+      },
+      {
+        commonName: "Joe-Pye Weed",
+        scientificName: "Eutrochium spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Rosemary_in_bloom.JPG/330px-Rosemary_in_bloom.JPG",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Spider Flower",
+        scientificName: "Cleome houtteana",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Cleome_hassleriana.jpg/330px-Cleome_hassleriana.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Phlox",
+        scientificName: "Phlox paniculata",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Phlox_Paniculata.jpg/330px-Phlox_Paniculata.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Bee Balm",
+        scientificName: "Citriodora-Hybr",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Monarda_didyma_00.jpg/330px-Monarda_didyma_00.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Blazing Star",
+        scientificName: "Liatris picata",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Liatris_spicata_Purple.jpg/330px-Liatris_spicata_Purple.jpg",
         safety: { cats: "Safe", dogs: "Safe" }
       },
       {
@@ -27,69 +135,27 @@ function fetchData(category) {
         safety: { cats: "Not Safe", dogs: "Not Safe" }
       },
       {
-        commonName: "Common Sage",
-        scientificName: "Salvia officinalis",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Salvia_officinalis0.jpg/330px-Salvia_officinalis0.jpg",
-        safety: { cats: "Moderately Safe", dogs: "Safe" }
-      },
-      {
-        commonName: "Yucca",
-        scientificName: "Hesperaloe sp.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Yucca_filamentosa.jpg/330px-Yucca_filamentosa.jpg",
-        safety: { cats: "Not Safe", dogs: "Not Safe" }
-      },
-      {
-        commonName: "Sunflower",
-        scientificName: "Helianthus annuus",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Sunflower_sky_backdrop.jpg/1200px-Sunflower_sky_backdrop.jpg",
+        commonName: "Black-eyed Susan",
+        scientificName: "Rudbeckia hirta",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Rudbeckia_hirta_kz03.jpg/330px-Rudbeckia_hirta_kz03.jpg",
         safety: { cats: "Safe", dogs: "Safe" }
       },
       {
-        commonName: "Dogwood",
-        scientificName: "Cornus",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Bgbo_cornus_kousa_var_chinensis_ies.jpg/330px-Bgbo_cornus_kousa_var_chinensis_ies.jpg",
+        commonName: "Aster",
+        scientificName: "Symphyotrichum spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Asteraceae_-_Aster_amellus.JPG/330px-Asteraceae_-_Aster_amellus.JPG",
         safety: { cats: "Safe", dogs: "Safe" }
       },
       {
-        commonName: "Elderberry",
-        scientificName: "Sambucus sp.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Sambucus-berries.jpg/330px-Sambucus-berries.jpg",
+        commonName: "Purple Sage",
+        scientificName: "Salvia leucantha",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Salvia_leucantha_%28Mexican_Bush_Sage%29.jpg/330px-Salvia_leucantha_%28Mexican_Bush_Sage%29.jpg",
         safety: { cats: "Not Safe", dogs: "Not Safe" }
       },
       {
-        commonName: "Oak",
-        scientificName: "Querus sp.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Brockwell_Oak_%289%29.jpg/1024px-Brockwell_Oak_%289%29.jpg",
-        safety: { cats: "Moderately Safe", dogs: "Not Safe" }
-      },
-      {
-        commonName: "Queen of the Night",
-        scientificName: "Epiphyllum oxypetalum",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Night-blooming_cereus-full-bloom.jpg/1280px-Night-blooming_cereus-full-bloom.jpg",
-        safety: { cats: "Safe", dogs: "Safe" }
-      },
-      {
-        commonName: "Jimsonweed",
-        scientificName: "Datura stramonium",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Datura_stramonium_2_%282005_07_07%29.jpg/330px-Datura_stramonium_2_%282005_07_07%29.jpg",
-        safety: { cats: "Not Safe", dogs: "Not Safe" }
-      },
-      {
-        commonName: "Brugmansia",
-        scientificName: "Brugmansia spp.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Brugmansia.jpg/330px-Brugmansia.jpg",
-        safety: { cats: "Not Safe", dogs: "Not Safe" }
-      },
-      {
-        commonName: "Carolina Jasmine",
-        scientificName: "Gelsemium sempervirens",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Gelsemium_sempervirens3.jpg/330px-Gelsemium_sempervirens3.jpg",
-        safety: { cats: "Not Safe", dogs: "Not Safe" }
-      },
-      {
-        commonName: "Butterfly bush",
-        scientificName: "Buddleja spp.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Buddleja_crispa_var._agathosma.jpg/330px-Buddleja_crispa_var._agathosma.jpg",
+        commonName: "Goldenrod",
+        scientificName: "Solidago canadensis",
+        image: "https://upload.wikimedia.org/wikipedia/commons/e/e2/Solidago_nemoralis.jpg",
         safety: { cats: "Safe", dogs: "Safe" }
       },
       {
@@ -99,88 +165,64 @@ function fetchData(category) {
         safety: { cats: "Not Safe", dogs: "Not Safe" }
       },
       {
-        commonName: "Rosemary",
-        scientificName: "Salvia rosmarinus",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Rosemary_in_bloom.JPG/330px-Rosemary_in_bloom.JPG",
-        safety: { cats: "Safe", dogs: "Safe" }
-      },
-      {
-        commonName: "Evening Primrose",
-        scientificName: "Oenothera spp.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Oenothera_rubricaulis_2014_G1.jpg/330px-Oenothera_rubricaulis_2014_G1.jpg",
-        safety: { cats: "Safe", dogs: "Safe" }
-      },
-      {
-        commonName: "Guava trees",
-        scientificName: "Psidium guajava",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Guava_flowers_%286700015761%29.jpg/1280px-Guava_flowers_%286700015761%29.jpg",
-        safety: { cats: "Moderately Safe", dogs: "Safe" }
-      },
-      {
-        commonName: "Banana trees",
-        scientificName: "Musa spp.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/2018_06_TropicalIslands_IMG_2170.jpg/1280px-2018_06_TropicalIslands_IMG_2170.jpg",
-        safety: { cats: "Moderately Safe", dogs: "Moderately Safe" }
-      },
-      {
-        commonName: "Cacao",
-        scientificName: "Theobroma cacao",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Cocoa_Pods.JPG/300px-Cocoa_Pods.JPG",
+        commonName: "Calliopsis",
+        scientificName: "Coreopsis spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Coreopsisgigantea.jpg/330px-Coreopsisgigantea.jpg",
         safety: { cats: "Not Safe", dogs: "Not Safe" }
       },
       {
-        commonName: "Mango trees",
-        scientificName: "Mangifera indica",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Mangoes_%28Magnifera_indica%29_from_India.jpg/330px-Mangoes_%28Magnifera_indica%29_from_India.jpg",
-        safety: { cats: " Moderately Safe", dogs: "Safe" }
-      },
-      {
-        commonName: "Fig tree",
-        scientificName: "Ficus carica",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Sycomoros_old.jpg/330px-Sycomoros_old.jpg",
-        safety: { cats: "Not Safe", dogs: "Moderately Safe" }
-      },
-      {
-        commonName: "Date tree",
-        scientificName: "Phoenix dactylifera",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Dates005.jpg/330px-Dates005.jpg",
-        safety: { cats: "Safe", dogs: "Moderately Safe" }
-      },
-      {
-        commonName: "Cashew",
-        scientificName: "Anacardium occidentale",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cashew_apples.jpg/330px-Cashew_apples.jpg",
-        safety: { cats: "Safe", dogs: "Moderately Safe" }
-      },
-      {
-        commonName: "Peach",
-        scientificName: "Prunus persica",
-        image: "https://upload.wikimedia.org/wikipedia/commons/d/da/Amygdalus_persica2.jpg",
-        safety: { cats: "Moderately Safe", dogs: "Moderately Safe" }
-      },
-      {
-        commonName: "Night Phlox",
-        scientificName: "Zaluzianskya ovata",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Zaluzianskya_ovata_two_forms_%288838450972%29.jpg/330px-Zaluzianskya_ovata_two_forms_%288838450972%29.jpg",
+        commonName: "Shasta Daisy",
+        scientificName: "Leucanthemum × superbum",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Leucanthemum_x_superbum_%27Becky%27_in_NH.jpg/330px-Leucanthemum_x_superbum_%27Becky%27_in_NH.jpg",
         safety: { cats: "Safe", dogs: "Safe" }
       },
       {
-        commonName: "Aspen Fleabane",
-        scientificName: "Erigeron spp.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Erigeron_speciosus_01.jpg/330px-Erigeron_speciosus_01.jpg",
-        safety: { cats: "Moderately Safe", dogs: "Moderately Safe" }
+        commonName: "Stonecrops",
+        scientificName: "Sedum spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Biting_stonecrop_close_800.jpg/330px-Biting_stonecrop_close_800.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
       },
       {
-        commonName: "Moonflowers",
-        scientificName: "Ipomoea alba",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Ipomoea_alba270483816.jpg/330px-Ipomoea_alba270483816.jpg",
+        commonName: "Blanket Flower",
+        scientificName: "Gaillardia aristata",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gaillardia_in_Aspen_%2891273%29.jpg/330px-Gaillardia_in_Aspen_%2891273%29.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Lilac",
+        scientificName: "Syringa vulgaris",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Stockholm-lilac.jpg/330px-Stockholm-lilac.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Japanese meadowsweet",
+        scientificName: "Spiraea japonica",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Spiraea_japonica_25-06-2010_13-58-09.JPG/330px-Spiraea_japonica_25-06-2010_13-58-09.JPG",
+        safety: { cats: "Safe", dogs: "Safe" }
+      },
+      {
+        commonName: "Azalea",
+        scientificName: "Rhododendron spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Azalea.750pix.jpg/330px-Azalea.750pix.jpg",
         safety: { cats: "Not Safe", dogs: "Not Safe" }
       },
       {
-        commonName: "Tobacco",
-        scientificName: "Nicotiana tabacum",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Tabak_9290019.JPG/330px-Tabak_9290019.JPG",
+        commonName: "Hydrangea",
+        scientificName: "Hydrangea spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Hydrangea_arborescens_annabelle.JPG/404px-Hydrangea_arborescens_annabelle.JPG",
         safety: { cats: "Not Safe", dogs: "Not Safe" }
+      },
+      {
+        commonName: "Hibiscus",
+        scientificName: "Hibiscus spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Hibiscus_flower_TZ.jpg/330px-Hibiscus_flower_TZ.jpg",
+        safety: { cats: "Not Safe", dogs: "Not Safe" }
+      },
+      {
+        commonName: "Nannyberry",
+        scientificName: "Viburnum spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Viburnum_lentago_NRCS-006.jpg/330px-Viburnum_lentago_NRCS-006.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
       },
       {
         commonName: "Honeysuckle",
@@ -189,123 +231,81 @@ function fetchData(category) {
         safety: { cats: "Not Safe", dogs: "Not Safe" }
       },
       {
-        commonName: "Four O'Clock",
-        scientificName: "Mirabilis jalapa",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Gul-Abas-4-O%27clock_plant.JPG/330px-Gul-Abas-4-O%27clock_plant.JPG",
+        commonName: "Cherry Tree",
+        scientificName: "Prunus spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Stablo_trešnje_Germersdorfer_u_cvatu.jpg/330px-Stablo_trešnje_Germersdorfer_u_cvatu.jpg",
+        safety: { cats: "Not Safe", dogs: "Not Safe" }
+      },
+      {
+        commonName: "Willow",
+        scientificName: "Salix spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Borage_starflower_Rohtopurasruoho_01.jpg/330px-Borage_starflower_Rohtopurasruoho_01.jpg",
         safety: { cats: "Not Safe", dogs: "Moderately Safe" }
       },
       {
-        commonName: "Thorn-apple",
-        scientificName: "Datura ceratocaula Ortega",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Sacred_datura_%28Datura_wrightii%29_%2814212557338%29.jpg/330px-Sacred_datura_%28Datura_wrightii%29_%2814212557338%29.jpg",
+        commonName: "Passion flower",
+        scientificName: "Passiflora spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/OQ_Passion_flower.jpg/330px-OQ_Passion_flower.jpg",
         safety: { cats: "Not Safe", dogs: "Not Safe" }
       },
       {
-        commonName: "Spider Flower",
-        scientificName: "Cleome houtteana",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Cleome_hassleriana.jpg/330px-Cleome_hassleriana.jpg",
-        safety: { cats: "Safe", dogs: "Safe" }
-      },
-      {
-        commonName: "French Marigolds",
-        scientificName: "Tagetes patula",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/French_marigold_Tagetes_patula.jpg/330px-French_marigold_Tagetes_patula.jpg",
+        commonName: "Trumpet Vine",
+        scientificName: "Campsis radicans",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Campsis-radicans-20080402.JPG/330px-Campsis-radicans-20080402.JPG",
         safety: { cats: "Not Safe", dogs: "Not Safe" }
       },
       {
-        commonName: "Lemon Balm",
-        scientificName: "Melissa Officinalis",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Lemon_balm_plant.jpg/330px-Lemon_balm_plant.jpg",
-        safety: { cats: "Safe", dogs: "Moderately Safe" }
-      },
-      {
-        commonName: "Spearmint",
-        scientificName: "Mentha spicata",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Minze.jpg/330px-Minze.jpg",
+        commonName: "Clematis",
+        scientificName: "Clematis spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Clematis_%27Nelly_Moser%27.JPG/330px-Clematis_%27Nelly_Moser%27.JPG",
         safety: { cats: "Not Safe", dogs: "Not Safe" }
       },
       {
-        commonName: "Thyme",
-        scientificName: "Thymus vulgaris",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Flowering_thyme.JPG/330px-Flowering_thyme.JPG",
-        safety: { cats: "Safe", dogs: "Safe" }
+        commonName: "Crabapple",
+        scientificName: "Malus spp.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Purple_prince_crabapple_tree.JPG/330px-Purple_prince_crabapple_tree.JPG",
+        safety: { cats: "Not Safe", dogs: "Moderately Safe" }
       },
       {
-        commonName: "Marjoram",
-        scientificName: "Origanum majorana",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Origanum_majorana_002.JPG/330px-Origanum_majorana_002.JPG",
-        safety: { cats: "Not Safe", dogs: "Not Safe" }
-      },
-      {
-        commonName: "Starflower",
-        scientificName: "Borage officinalis",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Borage_starflower_Rohtopurasruoho_01.jpg/330px-Borage_starflower_Rohtopurasruoho_01.jpg",
+        commonName: "Tulip tree",
+        scientificName: "Liriodendron tulipifera",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Liriodendron_tulipifera.jpg/330px-Liriodendron_tulipifera.jpg",
         safety: { cats: "Not Safe", dogs: "Safe" }
       },
       {
-        commonName: "Bee Balm",
-        scientificName: "Citriodora-Hybr",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Monarda_didyma_00.jpg/330px-Monarda_didyma_00.jpg",
+        commonName: "Egyptian starcluster",
+        scientificName: "Pentas lanceolata",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Penta.JPG/330px-Penta.JPG",
         safety: { cats: "Safe", dogs: "Safe" }
       },
       {
-        commonName: "Spotted Bee Balm",
-        scientificName: "Manarda punctata",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Monarda_punctataUGA1120190.jpg/330px-Monarda_punctataUGA1120190.jpg",
+        commonName: "Hollyhock",
+        scientificName: "Alcea rosea",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Alcea_setosa.jpg/330px-Alcea_setosa.jpg",
         safety: { cats: "Safe", dogs: "Safe" }
       },
       {
-        commonName: "Cardinal Flower",
-        scientificName: "Lobelia cardinalis",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Lobelia_cardinalis_-_Cardinal_Flower.jpg/330px-Lobelia_cardinalis_-_Cardinal_Flower.jpg",
-        safety: { cats: "Not Safe", dogs: "Not Safe" }
-      },
-      {
-        commonName: "Foxglove Beard-tongue",
-        scientificName: "Penstemon digitalis",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Penstemon_digitalis.jpg/330px-Penstemon_digitalis.jpg",
-        safety: { cats: "Not Safe", dogs: "Not Safe" }
-      },
-      {
-        commonName: "Smooth Blue Aster",
-        scientificName: "Aster laevis",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Symphyotrichum_laeve_93797924_%28cropped%29.jpg/330px-Symphyotrichum_laeve_93797924_%28cropped%29.jpg",
-        safety: { cats: "Not Safe", dogs: "Not Safe" }
-      },
-      {
-        commonName: "Aloe vera",
-        scientificName: "Aloe vera",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Aloe_vera_flower_inset.png/390px-Aloe_vera_flower_inset.png",
-        safety: { cats: "Not Safe", dogs: "Not Safe" }
-      },
-      {
-        commonName: "Dragon Fruit",
-        scientificName: "Hylocereus spp.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Lianjiang_County_-_Dongdai_Town_-_Yangguang_Dragong_Fruit_Farm_-_P1510432.JPG/330px-Lianjiang_County_-_Dongdai_Town_-_Yangguang_Dragong_Fruit_Farm_-_P1510432.JPG",
+        commonName: "Dragon's Blood Sedum",
+        scientificName: "Sedum spurium",
+        image: "https://www.seedneeds.com/cdn/shop/products/IMG_2529_600x600.jpg?v=1675735604",
         safety: { cats: "Moderately Safe", dogs: "Moderately Safe" }
       },
       {
-        commonName: "Eucalyptus",
-        scientificName: "Eucalyptus spp.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Eucalyptus_tereticornis_flowers%2C_capsules%2C_buds_and_foliage.jpeg/330px-Eucalyptus_tereticornis_flowers%2C_capsules%2C_buds_and_foliage.jpeg",
-        safety: { cats: "Not Safe", dogs: "Not Safe" }
+        commonName: "Dwarf Blazing Star",
+        scientificName: "Liatris microcephala",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Liatris_microcephala.jpg/330px-Liatris_microcephala.jpg",
+        safety: { cats: "Safe", dogs: "Safe" }
       },
       {
-        commonName: "Tamarind",
-        scientificName: "Tamarindus indica",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Tamarindus_indica_pods.JPG/330px-Tamarindus_indica_pods.JPG",
-        safety: { cats: "Moderately Safe", dogs: "Moderately Safe" }
+        commonName: "Lily of the Nile",
+        scientificName: "Agapanthus",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Agapanthus_africanus1.jpg/330px-Agapanthus_africanus1.jpg",
+        safety: { cats: "Not Safe", dogs: "Moderately Safe" }
       },
       {
-        commonName: "Baobab",
-        scientificName: "Adansonia spp.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Baobab_Adansonia_digitata.jpg/330px-Baobab_Adansonia_digitata.jpg",
-        safety: { cats: "Moderately Safe", dogs: "Moderately Safe" }
-      },
-      {
-        commonName: "Saguaro",
-        scientificName: "Carnegiea giganta",
-        image: "https://www.nps.gov/sagu/learn/nature/images/crested-saguaro.jpg",
+        commonName: "Spicebush",
+        scientificName: "Lindera benzoin",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Spicebush_%284506720062%29.jpg/330px-Spicebush_%284506720062%29.jpg",
         safety: { cats: "Safe", dogs: "Safe" }
       },
     ]
