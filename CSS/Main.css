@@ -166,6 +166,7 @@ button {
     margin-bottom: 14px;
     border: 2px solid #272001;
     border-radius: 20px;
+    background-color: #DCDCDC;
 }
 
 .signup-form input, .login-form input {
