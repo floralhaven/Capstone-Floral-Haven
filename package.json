@@ -2,8 +2,8 @@
   "name": "capstone-floral-haven-",
   "version": "1.0.0",
   "description": "Floral Haven Capstone Project",
-  "main": "index.js",
   "scripts": {
+    "start": "node JS/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
