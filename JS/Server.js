@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors'); 
 const app = express();
 const PORT = 3000;
-
+//mongodb+srv://Admin:<password>@originalcluster.g2m81ys.mongodb.net/?retryWrites=true&w=majority&appName=OriginalCluster
 app.use(bodyParser.json());
 app.use(cors());
 
