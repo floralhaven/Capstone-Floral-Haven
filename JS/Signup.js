@@ -15,13 +15,38 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Example: Save user data (you'll replace this with your own backend logic)
-        signup(email, password);
+        // Prepare user data
+        const userData = {
+            email: email,
+            password: password
+        };
+
+        // Send user data to the server
+        signup(userData);
     });
 
-    function signup(email, password) {
-        sessionStorage.setItem('loggedInUser', email);
-        alert('Signed up successfully!');
-        window.location.href = '../../profile/profile.html'; // Redirect to profile page after signup
+    async function signup(userData) {
+        try {
+            const response = await fetch('http://localhost:3000/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                sessionStorage.setItem('loggedInUser', userData.email);
+                alert('Signed up successfully!');
+                window.location.href = '../../profile/profile.html'; // Redirect to profile page after signup
+            } else {
+                alert(result.message || 'Sign up failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Sign up failed. Please try again.');
+        }
     }
 });

@@ -24,16 +24,16 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             if (data.success) {
                 sessionStorage.setItem('loggedInUser', email);
-                window.location.href = "../profile/profile.html";
+                window.location.href = "../profile/profile.html"; // Redirect to profile page on successful login
             } else {
-                alert(data.message);
+                alert(data.message); // Show error message on login failure
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('An error occurred while logging in.');
+            alert('An error occurred while logging in.'); // Show error message on fetch failure
         });
 
-        document.getElementById('login-form').reset();
+        document.getElementById('login-form').reset(); // Reset the form fields
     });
 });
