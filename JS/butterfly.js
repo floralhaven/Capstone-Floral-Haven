@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  fetchData('buterflies').then(data => {
+  fetchData('butterflies').then(data => {
     populateCards(data);
   }).catch(error => {
     console.error('Error fetching data:', error);

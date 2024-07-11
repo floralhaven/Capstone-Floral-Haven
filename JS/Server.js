@@ -64,8 +64,9 @@ app.post('/login', async (req, res) => {
 
 // Endpoint to get data from a specific collection
 app.get('/data/:collectionName', async (req, res) => {
+    const collectionName = req.params.collectionName;
+    console.log("Collection Name", collectionName);
     try {
-        const collectionName = req.params.collectionName;
         const db = await connectToDB();
         const collection = db.collection(collectionName);
         const data = await collection.find().toArray();

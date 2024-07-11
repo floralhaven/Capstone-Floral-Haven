@@ -86,15 +86,16 @@ button {
 .plant-container {
     display: grid;
     grid-template-columns: repeat(5, 200px);
-    gap: 50px;
-    margin-left: 18.5%;
+    gap: 70px;
+    margin-left: 17%;
     padding: 10px;
 }
 
 .card {
     width: 25vh;
-    height: 40vh;
+    height: 49vh;
     text-align: center;
+    padding: 10px;
     font-size: 18px;
     background-color: #6F9479;
     border: 2px solid #272001;
