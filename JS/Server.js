@@ -2,9 +2,9 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const bcrypt = require('bcrypt'); // Import bcrypt
-const connectToDB = require('./db'); // Import the DB connection module
-require('dotenv').config(); // To load environment variables from a .env file
+const bcrypt = require('bcrypt');
+const connectToDB = require('./db'); 
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,12 +20,10 @@ app.post('/signup', async (req, res) => {
     try {
         const userData = req.body;
         const db = await connectToDB();
-        const usersCollection = db.collection('users');
+        const usersCollection = db.collection('Users');
 
-        // Hash the user's password
         const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
 
-        // Replace the plain password with the hashed password
         userData.password = hashedPassword;
 
         await usersCollection.insertOne(userData);
@@ -40,13 +38,11 @@ app.post('/login', async (req, res) => {
     try {
         const loginData = req.body;
         const db = await connectToDB();
-        const usersCollection = db.collection('users');
+        const usersCollection = db.collection('Users');
 
-        // Find the user by email
         const user = await usersCollection.findOne({ email: loginData.email });
 
         if (user) {
-            // Compare the provided password with the stored hashed password
             const passwordMatch = await bcrypt.compare(loginData.password, user.password);
 
             if (passwordMatch) {

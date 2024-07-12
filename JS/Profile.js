@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Check if user is logged in
             const isLoggedIn = checkLoggedIn();
             if (isLoggedIn) {
-                window.location.href = '../../profile/profile.html'; 
+                window.location.href = 'profile.html'; 
             } else {
-                window.location.href = '../../profile/guestprofile.html'; 
+                window.location.href = 'guestprofile.html'; 
             }
         });
     }
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Clear session storage to log out the user
             sessionStorage.removeItem('loggedInUser');
             // Redirect to the home page
-            window.location.href = '../home/index.html';
+            window.location.href = 'index.html';
         });
     }
 

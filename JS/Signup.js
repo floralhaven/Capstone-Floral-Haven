@@ -1,31 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
     const signupForm = document.getElementById('signup-form');
 
-    signupForm.addEventListener('submit', function(event) {
+    signupForm.addEventListener('submit', async function(event) {
         event.preventDefault();
 
-        // Retrieve form inputs
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
 
-        // Validate password match (optional, but recommended)
         if (password !== confirmPassword) {
             alert('Passwords do not match. Please try again.');
             return;
         }
 
-        // Prepare user data
         const userData = {
             email: email,
             password: password
         };
 
-        // Send user data to the server
-        signup(userData);
-    });
-
-    async function signup(userData) {
         try {
             const response = await fetch('http://localhost:3000/signup', {
                 method: 'POST',
@@ -40,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 sessionStorage.setItem('loggedInUser', userData.email);
                 alert('Signed up successfully!');
-                window.location.href = '../../profile/profile.html'; // Redirect to profile page after signup
+                window.location.href = 'profile.html'; // Redirect to profile page after signup
             } else {
                 alert(result.message || 'Sign up failed. Please try again.');
             }
@@ -48,5 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
             alert('Sign up failed. Please try again.');
         }
-    }
+
+        signupForm.reset(); // Reset the form fields after submission
+    });
 });
