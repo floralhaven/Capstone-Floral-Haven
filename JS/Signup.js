@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
 
         const email = document.getElementById('email').value;
+        const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
 
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const userData = {
             email: email,
+            username: username,
             password: password
         };
 

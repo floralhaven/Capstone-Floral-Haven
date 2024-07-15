@@ -2,11 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('loginButton').addEventListener('click', async function(event) {
         event.preventDefault();
 
-        const email = document.getElementById('email').value;
+        const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
         const loginData = {
-            email: email,
+            username: username,
             password: password
         };
 

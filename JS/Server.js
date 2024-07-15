@@ -40,7 +40,7 @@ app.post('/login', async (req, res) => {
         const db = await connectToDB();
         const usersCollection = db.collection('Users');
 
-        const user = await usersCollection.findOne({ email: loginData.email });
+        const user = await usersCollection.findOne({ username: loginData.username });
 
         if (user) {
             const passwordMatch = await bcrypt.compare(loginData.password, user.password);
