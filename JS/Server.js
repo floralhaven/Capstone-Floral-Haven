@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const { ObjectId } = require('mongodb');
 const connectToDB = require('./db'); 
 require('dotenv').config();
 
@@ -46,7 +47,7 @@ app.post('/login', async (req, res) => {
             const passwordMatch = await bcrypt.compare(loginData.password, user.password);
 
             if (passwordMatch) {
-                res.json({ success: true, message: 'Login successful' });
+                res.json({ success: true, message: 'Login successful', userId: user._id }); 
             } else {
                 res.json({ success: false, message: 'Invalid email or password' });
             }
@@ -58,14 +59,69 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// Handle garden layout saving POST request
+app.post('/user/:userId/layout', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const layoutData = req.body;
+        const db = await connectToDB();
+        const usersCollection = db.collection('Users');
+
+        const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+
+        if (user) {
+            user.layouts.push(layoutData);
+            await usersCollection.updateOne(
+                { _id: new ObjectId(userId) },
+                { $set: { layouts: user.layouts } }
+            );
+            res.json({ message: 'Layout saved successfully!' });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error saving layout data' });
+    }
+});
+
+// Handle retrieving user layouts GET request
+app.get('/user/:userId/layouts', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const db = await connectToDB();
+        const usersCollection = db.collection('Users');
+
+        const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+
+        if (user) {
+            res.json(user.layouts);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching layouts' });
+    }
+});
+
+
 // Endpoint to get data from a specific collection
 app.get('/data/:collectionName', async (req, res) => {
     const collectionName = req.params.collectionName;
-    console.log("Collection Name", collectionName);
+    const commonName = req.query.commonName; // Get the commonName from the query
+
     try {
         const db = await connectToDB();
         const collection = db.collection(collectionName);
-        const data = await collection.find().toArray();
+
+        let data;
+        if (commonName) {
+            // If querying with commonName
+            data = await collection.find({ commonName: commonName }).toArray();
+        } else {
+            // Fetch all data from the collection
+            data = await collection.find().toArray();
+        }
+
         res.json(data);
     } catch (error) {
         res.status(500).json({ message: `Error fetching data from collection: ${collectionName}` });
