@@ -30,12 +30,12 @@ button {
     padding-top: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     border-right: 2px solid #272001;
 }
 
 .navbar img {
     width: 150px;
+    margin-left: 20px;
     border: 2px solid #272001;
 }
 
@@ -51,6 +51,7 @@ button {
     width: 150px;
     height: 50px;
     margin-top: 20px;
+    margin-left: 20px;
     font-size: 20px;
 }
 
@@ -92,12 +93,12 @@ button {
     max-width: calc(250px * 5 + 40px * 4); /* 5 cards and 4 gaps */
     margin-left: 200px; /* Centering the container */
     padding: 20px;
-    gap: 40px;
+    gap: 30px;
 }
 
 .card {
-    flex: 0 1 200px; /* Fixing card width */
-    height: 62vh;
+    flex: 0 1 230px; /* Fixing card width */
+    height: 50vh;
     text-align: center;
     padding: 10px;
     font-size: 18px;
@@ -110,6 +111,42 @@ button {
     width: 100%;
     height: 50%;
     margin-top: 10px;
+}
+
+/* Garden Planner */
+.grid-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 0fr);
+    margin-top: 10px;
+}
+
+.grid-item {
+    width: 100px;
+    height: 100px;
+    border:#272001 2px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-plant {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.garden-planner{
+    border:#272001 2px solid;
+    width: 600px;
+    padding: 10px;
+}
+
+#saveLayoutButton{
+    margin-left: 200px;
+}
+
+.garden-planner label {
+    margin-left: 60px;
 }
 
 /* Main Content */
@@ -142,9 +179,9 @@ button {
 
 .signup-form {
     width: 400px;
-    margin-top: 200px;
+    margin-top: 155px;
     margin-left: 690px;
-    margin-bottom: 160px;
+    margin-bottom: 112px;
 }
 
 .login-form {
@@ -187,13 +224,14 @@ button {
 
 .profile {
     width: 600px;
-    height: 650px;
-    margin-top: 50px;
+    height: 730px;
+    margin-top: 35px;
     margin-left: 600px;
-    margin-bottom: 120px;
+    margin-bottom: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .profile h1 {
@@ -201,41 +239,53 @@ button {
     font-size: 52px;
 }
 
-.passwordchanger {
+.Settings{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    margin-top: 150px;
+    margin-left: 690px;
+    margin-bottom: 126px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    font-size: large;
+    background-color: #6F9479;
+    border: 2px solid #272001;
+    border-radius: 20px;
+    color: #DCDCDC;
+}
+
+.Settings h1{
+    text-align: center;
+    font-size: 42px;
+}
+
+.passwordchanger,
+.usernamechanger {
     width: 200px;
     height: 190px;
-    margin-top: 10px;
     padding: 5px;
-    border: 2px solid #272001;
+    margin-left: 25%;
 }
 
 .passwordchanger input,
-.passwordchanger label {
+.passwordchanger label,
+.usernamechanger input, 
+.usernamechanger label {
     margin: 5px;
 }
 
-.passwordchanger button {
-    width: 150px;
-    margin: 20px 0 0 20px;
+.passwordchanger button,
+.usernamechanger button {
+    background-color: #646536;
+    color: #DCDCDC;
+    border: 2px solid #272001;
+    cursor: pointer;
 }
 
 .logoutbtn {
     width: 100px;
     height: 40px;
-    margin-left: 250px;
-}
-
-.comingsoon {
-    width: 99.5%;
-    margin-top: 10px;
-    font-size: 44px;
-    text-align: center;
-    border: 2px solid #272001;
-}
-
-.comingsoon h2 {
-    padding: 20px;
-    transform: rotate(-20deg);
 }
 
 /* Footer Styles */

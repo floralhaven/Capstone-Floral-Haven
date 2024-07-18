@@ -14,13 +14,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('loginLink').style.display = 'none'; 
             document.getElementById('profileLink').style.display = 'inline'; 
             document.getElementById('guestProfileLink').style.display = 'none'; 
-            document.getElementById('logoutLink').style.display = 'inline'; 
         } else {
             document.getElementById('signupLink').style.display = 'inline'; 
             document.getElementById('loginLink').style.display = 'inline'; 
             document.getElementById('profileLink').style.display = 'none'; 
             document.getElementById('guestProfileLink').style.display = 'inline'; 
-            document.getElementById('logoutLink').style.display = 'none'; 
         }
     }
 
@@ -28,4 +26,3 @@ document.addEventListener('DOMContentLoaded', function() {
         return sessionStorage.getItem('loggedInUser') !== null;
     }
 });
-

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
 
             if (data.success) {
-                sessionStorage.setItem('loggedInUser', email);
+                sessionStorage.setItem('loggedInUserId', data.userId); // Set userId from response
                 alert('Login successful!');
                 window.location.href = 'profile.html'; // Redirect to profile page on successful login
             } else {
