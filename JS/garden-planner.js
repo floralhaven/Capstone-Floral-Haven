@@ -1,6 +1,12 @@
 let grid = Array(3).fill().map(() => Array(3).fill(''));
 let userId = sessionStorage.getItem('loggedInUserId'); // Store userId
 
+// Call this function to set userId after successful login
+function setUserId(id) {
+    userId = id;
+    sessionStorage.setItem('loggedInUserId', id);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     userId = sessionStorage.getItem('loggedInUserId'); // Retrieve userId
     fetchLayouts(); // Fetch existing layouts on page load
@@ -10,43 +16,34 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function addPlant() {
+    const collection = document.getElementById('collection-select').value;
     const plantName = document.getElementById('plant-name').value;
-    const collection = document.getElementById('collection-select').value; // Get the selected collection
-
-    fetch(`http://localhost:3000/data/${collection}?commonName=${plantName}`)
+    fetch(`http://localhost:3000/data/${collection}?name=${plantName}`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
                 const img = document.createElement('img');
-                img.src = data[0].image; // Use the correct field name for the image
+                img.src = data[0].image;
                 img.alt = plantName;
-                img.classList.add('grid-plant');
-
+                img.classList.add('grid-item');
                 // Find the first empty cell in the grid
                 for (let i = 0; i < grid.length; i++) {
                     for (let j = 0; j < grid[i].length; j++) {
                         if (grid[i][j] === '') {
                             grid[i][j] = data[0].image;
-                            const cellDiv = document.querySelector(`.grid-item[data-row="${i}"][data-col="${j}"]`);
-                            cellDiv.innerHTML = '';
-                            cellDiv.appendChild(img);
+                            const cell = document.querySelector(`.grid-item[data-row="${i}"][data-col="${j}"]`);
+                            cell.appendChild(img);
                             return;
                         }
                     }
                 }
-                alert('The garden planner is full. Please save your layout or remove a plant to add more.');
             } else {
                 alert('Plant not found');
             }
-        })
-        .catch(error => {
-            console.error('Error fetching plant data:', error);
         });
 }
 
 function saveLayout() {
-    userId = sessionStorage.getItem('loggedInUserId'); // Retrieve userId again before saving
-
     if (!userId) {
         alert('User not logged in');
         return;
@@ -62,12 +59,11 @@ function saveLayout() {
     }).then(response => response.json())
         .then(data => {
             console.log('Layout saved:', data);
+            fetchLayouts(); // Refresh layouts after saving
         });
 }
 
 function fetchLayouts() {
-    userId = sessionStorage.getItem('loggedInUserId'); // Retrieve userId again before fetching layouts
-
     if (!userId) {
         alert('User not logged in');
         return;
@@ -77,11 +73,27 @@ function fetchLayouts() {
         .then(response => response.json())
         .then(layouts => {
             console.log('User layouts:', layouts);
+            const layoutsDiv = document.getElementById('layouts');
+            layoutsDiv.innerHTML = ''; // Clear existing layouts
             // Render layouts on the page
             layouts.forEach(layout => {
                 const layoutDiv = document.createElement('div');
                 layoutDiv.innerHTML = `<h3>${layout.name}</h3>`;
-                document.getElementById('layouts').appendChild(layoutDiv);
+                layoutDiv.classList.add('layout');
+                layout.grid.forEach((row, rowIndex) => {
+                    row.forEach((cell, colIndex) => {
+                        const cellDiv = document.createElement('div');
+                        cellDiv.classList.add('grid-item');
+                        if (cell) {
+                            const img = document.createElement('img');
+                            img.src = cell;
+                            img.classList.add('grid-item');
+                            cellDiv.appendChild(img);
+                        }
+                        layoutDiv.appendChild(cellDiv);
+                    });
+                });
+                layoutsDiv.appendChild(layoutDiv);
             });
         });
 }
