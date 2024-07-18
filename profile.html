@@ -28,12 +28,15 @@
             <span id="loginLink"><a href="Login.html"><button class="btn">Login</button></a></span>
             <span id="profileLink" style="display:none;"><a href="Profile.html"><button class="btn">Profile</button></a></span>
             <span id="guestProfileLink" style="display:none;"><a href="guestprofile.html"><button class="btn">Guest Profile</button></a></span>
-            <span id="logoutLink" style="display:none;"><button class="btn">Logout</button></span>
         </nav>    
     </aside> 
 
     <div class="profile">
         <h1>Profile</h1>
+    
+        <button class="logoutbtn" id="logoutbtn">log out</button>
+        <a href="Settings.html"><button class="settingsbtn" id="settingsbtn">Settings</button></a>
+        <br/>
 
         <div class="garden-planner">
             <label for="collection-select">Choose a collection:</label>
@@ -65,18 +68,8 @@
                 <div class="grid-item" data-row="2" data-col="2"></div>
             </div>
             <br/>
-            
+            <h3>Your Layouts</h3>
             <div id="layouts"></div>
-        </div>
-    
-        <div class="passwordchanger">
-            <form>
-                <label for="oldpassword">Old Password</label>
-                <input type="password" id="oldpassword" name="oldpassword">
-                <label for="newpassword">New Password</label>
-                <input type="password" id="newpassword" name="newpassword">
-                <button type="submit">Change password</button>
-            </form>
         </div>
     </div>
 

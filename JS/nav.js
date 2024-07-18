@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateNavbar(); 
 
     document.getElementById('logoutLink').addEventListener('click', function() {
-        sessionStorage.removeItem('loggedInUserId'); // Remove the correct key
+        sessionStorage.removeItem('loggedInUser'); 
         updateNavbar(); // Update navbar links after logout
     });
 
@@ -23,6 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function checkLoggedIn() {
-        return sessionStorage.getItem('loggedInUserId') !== null; // Check the correct key
+        return sessionStorage.getItem('loggedInUser') !== null;
     }
 });
