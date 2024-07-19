@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const loginForm = document.getElementById('login-form'); 
+    const loginForm = document.getElementById('login-form'); // Ensure correct ID
 
     if (loginForm) {
         loginForm.addEventListener('submit', function(event) {
@@ -19,12 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.success) {
                     sessionStorage.setItem('loggedInUser', data.userId); // Store user ID
-                    console.log('User logged in, redirecting to profile'); // Debug log
                     window.location.href = 'Profile.html'; // Redirect to profile page
                 } else {
-                    alert('Login failed: ' + data.message);
+                    console.error('Login failed:', data.message); // Use console instead of alert
                 }
-            })            
+            })
             .catch(error => {
                 console.error('Error during login:', error);
             });

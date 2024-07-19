@@ -23,18 +23,8 @@ app.use(session({
     cookie: { secure: true, maxAge: 24 * 60 * 60 * 1000 }
 }));
 
-// Middleware to check if user is logged in
-function isAuthenticated(req, res, next) {
-    if (req.session.user) {
-        next();
-    } else {
-        res.status(401).json({ message: 'Unauthorized' });
-    }
-}
-
-// Endpoint to check if the user is logged in
 app.get('/check-session', (req, res) => {
-    if (req.session && req.session.userId) {
+    if (req.session.userId) {
         res.json({ loggedIn: true });
     } else {
         res.json({ loggedIn: false });
@@ -208,35 +198,6 @@ app.post('/change-password', async (req, res) => {
         res.json({ message: 'Password changed successfully' });
     } catch (error) {
         console.error('Error changing password:', error);
-        res.status(500).json({ message: 'Server error' });
-    }
-});
-
-// Handle username change POST request
-app.post('/change-username', async (req, res) => {
-    const { oldusername, newusername, userId } = req.body;
-
-    try {
-        const db = await connectToDB();
-        const usersCollection = db.collection('Users');
-
-        const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        if (user.username !== oldusername) {
-            return res.status(400).json({ message: 'Old username is incorrect' });
-        }
-
-        await usersCollection.updateOne(
-            { _id: new ObjectId(userId) },
-            { $set: { username: newusername } }
-        );
-
-        res.json({ message: 'Username changed successfully' });
-    } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
 });

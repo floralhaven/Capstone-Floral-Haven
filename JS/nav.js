@@ -1,10 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     updateNavbar(); 
 
-    document.getElementById('logoutLink')?.addEventListener('click', function() {
-        sessionStorage.removeItem('loggedInUser'); 
-        updateNavbar(); // Update navbar links after logout
-    });
+    const logoutLink = document.getElementById('logoutLink');
+    if (logoutLink) {
+        logoutLink.addEventListener('click', function() {
+            sessionStorage.removeItem('loggedInUser'); 
+            updateNavbar(); // Update navbar links after logout
+        });
+    }
 
     function updateNavbar() {
         const isLoggedIn = checkLoggedIn(); 
