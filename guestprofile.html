@@ -36,16 +36,48 @@
         <div class="profile">
             <h1>Profile</h1>
 
-            <h2>You are in a guest account to access the other parts of the profile page please sign up or login </h2>
-            <div class="comingsoon">
-                <h2>Coming soon!</h2>
+            <h2>You are in a guest account Have full access to the garden planner and other sections of Floral Haven please Sign up or Log in! </h2>
+            <div class="garden-planner">
+                <label for="collection-select">Choose a collection:</label>
+                <select id="collection-select">
+                    <option value="bats">Bats</option>
+                    <option value="bees">Bees</option>
+                    <option value="butterflies">Butterflies</option>
+                    <option value="hummingbirds">Hummingbirds</option>
+                </select>
+                <br/>
+    
+                <label for="plant-name">Enter plant name:</label>
+                <input type="text" id="plant-name">
+                <button id="addPlantButton">Add Plant</button>
+                <br/>
+                
+                <button id="saveLayoutButton">Save Layout</button>
+    
+                <div id="plant-grid" class="grid-container">
+                    <!-- Grid cells -->
+                    <div class="grid-item" data-row="0" data-col="0"></div>
+                    <div class="grid-item" data-row="0" data-col="1"></div>
+                    <div class="grid-item" data-row="0" data-col="2"></div>
+                    <div class="grid-item" data-row="1" data-col="0"></div>
+                    <div class="grid-item" data-row="1" data-col="1"></div>
+                    <div class="grid-item" data-row="1" data-col="2"></div>
+                    <div class="grid-item" data-row="2" data-col="0"></div>
+                    <div class="grid-item" data-row="2" data-col="1"></div>
+                    <div class="grid-item" data-row="2" data-col="2"></div>
+                </div>
+                <br/>
+                <h3>Your Layouts</h3>
+                <div id="layouts"></div>
             </div>
-
+        </div>
         </div>
 
         <footer class="non-infofooter">
             <p>© Floral Haven. All rights are reserved.<p>
         </footer>
         <script src="JS/nav.js"></script>
+        <script src="JS/profile.js"></script>
+        <script src="JS/garden-planner.js"></script>
     </body>    
 </html>
