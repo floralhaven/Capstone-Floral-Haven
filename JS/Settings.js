@@ -1,26 +1,54 @@
-document.getElementById('passwordchanger').addEventListener('submit', async function(event) {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    const formElement = document.getElementById('changePasswordForm');
+    const userIdField = document.getElementById('userId');
 
-    const oldpassword = document.getElementById('oldpassword').value;
-    const newpassword = document.getElementById('newpassword').value;
-    const userId = "user's userId"; // Replace this with the actual userId, possibly fetched from a session or token
+    // Get the user ID from sessionStorage
+    const userId = sessionStorage.getItem('loggedInUser');
+    if (userId && /^[0-9a-fA-F]{24}$/.test(userId)) {
+        userIdField.value = userId;
+    } else {
+        console.error('Invalid or missing User ID in sessionStorage.');
+        alert('Error: Unable to retrieve user ID.');
+        return;
+    }
 
-    try {
-        const response = await fetch('/change-password', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ oldpassword, newpassword, userId })
+    if (formElement) {
+        formElement.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const oldPassword = document.getElementById('oldpassword').value;
+            const newPassword = document.getElementById('newpassword').value;
+            const userId = userIdField.value;
+
+            if (!oldPassword || !newPassword || !userId) {
+                alert('Please fill out all fields and make sure you are logged in.');
+                return;
+            }
+
+            fetch('/change-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    oldpassword: oldPassword,
+                    newpassword: newPassword,
+                    userId: userId // Include userId from hidden field in the request body
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'Password changed successfully') {
+                    alert('Password changed successfully');
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error changing password:', error);
+            });
         });
-
-        if (response.ok) {
-            alert('Password changed successfully');
-        } else {
-            const result = await response.json();
-            alert(`Error: ${result.message}`);
-        }
-    } catch (error) {
-        alert('Error changing password');
+    } else {
+        console.error('Element with ID "changePasswordForm" not found.');
     }
 });

@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -14,6 +15,31 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '..')));
 
 const saltRounds = 10; // Number of salt rounds for bcrypt
+
+app.use(session({
+    secret: 'kahfakegrweu32iu4y98324yhkewrkhwg32iu4y298e7294379', 
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true, maxAge: 24 * 60 * 60 * 1000 }
+}));
+
+// Middleware to check if user is logged in
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.status(401).json({ message: 'Unauthorized' });
+    }
+}
+
+// Endpoint to check if the user is logged in
+app.get('/check-session', (req, res) => {
+    if (req.session && req.session.userId) {
+        res.json({ loggedIn: true });
+    } else {
+        res.json({ loggedIn: false });
+    }
+});
 
 // Handle sign-up POST request
 app.post('/signup', async (req, res) => {
@@ -46,16 +72,32 @@ app.post('/login', async (req, res) => {
             const passwordMatch = await bcrypt.compare(loginData.password, user.password);
 
             if (passwordMatch) {
-                res.json({ success: true, message: 'Login successful', userId: user._id }); 
+                res.json({
+                    success: true,
+                    message: 'Login successful',
+                    userId: user._id // Ensure user ID is included in the response
+                });
             } else {
-                res.json({ success: false, message: 'Invalid email or password' });
+                res.json({ success: false, message: 'Invalid username or password' });
             }
         } else {
-            res.json({ success: false, message: 'Invalid email or password' });
+            res.json({ success: false, message: 'Invalid username or password' });
         }
     } catch (error) {
         res.status(500).json({ message: 'Error reading user data' });
     }
+});
+
+
+// Handle logout
+app.post('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ message: 'Logout failed' });
+        }
+        res.clearCookie('connect.sid'); 
+        res.json({ message: 'Logout successful' });
+    });
 });
 
 // Handle garden layout saving POST request
@@ -118,9 +160,61 @@ app.get('/data/:collectionName', async (req, res) => {
     }
 });
 
-// Handle password change POST request
 app.post('/change-password', async (req, res) => {
     const { oldpassword, newpassword, userId } = req.body;
+
+    try {
+        console.log('Received request to change password:', { oldpassword, newpassword, userId });
+
+        const db = await connectToDB();
+        const usersCollection = db.collection('Users');
+
+        if (!userId || !oldpassword || !newpassword) {
+            console.log('Missing required fields');
+            return res.status(400).json({ message: 'Missing required fields' });
+        }
+
+        const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+
+        if (!user) {
+            console.log('User not found');
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const passwordMatch = await bcrypt.compare(oldpassword, user.password);
+
+        if (!passwordMatch) {
+            console.log('Old password is incorrect');
+            return res.status(400).json({ message: 'Old password is incorrect' });
+        }
+
+        const hashedNewPassword = await bcrypt.hash(newpassword, saltRounds);
+
+        const result = await usersCollection.updateOne(
+            { _id: new ObjectId(userId) },
+            { $set: { password: hashedNewPassword } }
+        );
+
+        console.log('Database update result:', result);
+
+        if (result.matchedCount === 0) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        if (result.modifiedCount === 0) {
+            return res.status(500).json({ message: 'Password update failed' });
+        }
+
+        res.json({ message: 'Password changed successfully' });
+    } catch (error) {
+        console.error('Error changing password:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Handle username change POST request
+app.post('/change-username', async (req, res) => {
+    const { oldusername, newusername, userId } = req.body;
 
     try {
         const db = await connectToDB();
@@ -132,20 +226,16 @@ app.post('/change-password', async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const passwordMatch = await bcrypt.compare(oldpassword, user.password);
-
-        if (!passwordMatch) {
-            return res.status(400).json({ message: 'Old password is incorrect' });
+        if (user.username !== oldusername) {
+            return res.status(400).json({ message: 'Old username is incorrect' });
         }
-
-        const hashedNewPassword = await bcrypt.hash(newpassword, saltRounds);
 
         await usersCollection.updateOne(
             { _id: new ObjectId(userId) },
-            { $set: { password: hashedNewPassword } }
+            { $set: { username: newusername } }
         );
 
-        res.json({ message: 'Password changed successfully' });
+        res.json({ message: 'Username changed successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }

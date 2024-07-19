@@ -27,7 +27,7 @@
             <br>
             <span id="signupLink"><a href="Signup.html"><button class="btn">Sign up</button></a></span>
             <span id="loginLink"><a href="Login.html"><button class="btn">Login</button></a></span>
-            <span id="profileLink" style="display:none;"><a href="Profile.html"><button class="btn">Profile</button></a></span>
+            <a href="Profile.html"><button class="btn">Profile</button></a>
             <span id="guestProfileLink" style="display:none;"><a href="guestprofile.html"><button class="btn">Guest Profile</button></a></span>
         </nav>
     </aside>
@@ -36,7 +36,8 @@
         <h1>Settings</h1>
         <br>
         <div class="passwordchanger">
-            <form id="passwordchanger">
+            <form id="changePasswordForm">
+                <input type="hidden" id="userId" name="userId">
                 <label for="oldpassword">Old Password</label>
                 <input type="password" id="oldpassword" name="oldpassword">
                 <br>
@@ -57,11 +58,14 @@
                 <button type="submit">Change Username</button>
             </form>
         </div>
+        <a href="Profile.html"><button class="btn">Back To Profile</button></a>
     </div>
     
     <footer class="non-infofooter">
         <p>© Floral Haven. All rights are reserved.<p>
     </footer>
+    <script src="JS/Settings.js"></script>
+    <script src="JS/nav.js"></script>
 </body>
 
 </html>

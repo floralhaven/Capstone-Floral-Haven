@@ -1,31 +1,43 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const profileButton = document.getElementById('profileButton');
     const logoutButton = document.getElementById('logoutbtn');
 
     if (profileButton) {
-        profileButton.addEventListener('click', function(event) {
+        profileButton.addEventListener('click', function (event) {
             event.preventDefault();
             // Check if user is logged in
-            const isLoggedIn = checkLoggedIn();
-            if (isLoggedIn) {
-                window.location.href = 'profile.html'; 
-            } else {
-                window.location.href = 'guestprofile.html'; 
-            }
+            fetch('/check-session', { method: 'GET' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.loggedIn) {
+                        window.location.href = 'profile.html';
+                    } else {
+                        window.location.href = 'guestprofile.html';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking session:', error);
+                });
         });
     }
 
     if (logoutButton) {
-        logoutButton.addEventListener('click', function(event) {
+        logoutButton.addEventListener('click', function (event) {
             event.preventDefault();
-            // Clear session storage to log out the user
-            sessionStorage.removeItem('loggedInUser');
-            // Redirect to the home page
-            window.location.href = 'index.html';
-        });
-    }
+            fetch('/logout', { method: 'POST' })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.message === 'Logout successful') {
+                        sessionStorage.removeItem('loggedInUser');
+                        window.location.href = 'index.html'; // Redirect to home page
+                    } else {
+                        alert('Logout failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error logging out:', error);
+                });
 
-    function checkLoggedIn() {
-        return sessionStorage.getItem('loggedInUser') !== null;
+        });
     }
 });

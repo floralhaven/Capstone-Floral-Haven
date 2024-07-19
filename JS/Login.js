@@ -1,38 +1,33 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('loginButton').addEventListener('click', async function(event) {
-        event.preventDefault();
+    const loginForm = document.getElementById('login-form'); 
 
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
 
-        const loginData = {
-            username: username,
-            password: password
-        };
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-        try {
-            const response = await fetch('http://localhost:3000/login', {
+            fetch('/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(loginData)
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    sessionStorage.setItem('loggedInUser', data.userId); // Store user ID
+                    console.log('User logged in, redirecting to profile'); // Debug log
+                    window.location.href = 'Profile.html'; // Redirect to profile page
+                } else {
+                    alert('Login failed: ' + data.message);
+                }
+            })            
+            .catch(error => {
+                console.error('Error during login:', error);
             });
-
-            const data = await response.json();
-
-            if (data.success) {
-                sessionStorage.setItem('loggedInUserId', data.userId); // Set userId from response
-                alert('Login successful!');
-                window.location.href = 'profile.html'; // Redirect to profile page on successful login
-            } else {
-                alert(data.message); // Show error message on login failure
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred while logging in.'); // Show error message on fetch failure
-        }
-
-        document.getElementById('login-form').reset(); // Reset the form fields
-    });
+        });
+    }
 });
