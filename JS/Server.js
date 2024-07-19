@@ -5,10 +5,9 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const { ObjectId } = require('mongodb');
 const connectToDB = require('./db'); 
-require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -100,7 +99,7 @@ app.get('/user/:userId/layouts', async (req, res) => {
 // Endpoint to get data from a specific collection
 app.get('/data/:collectionName', async (req, res) => {
     const collectionName = req.params.collectionName;
-    const commonName = req.query.commonName; // Get the commonName from the query
+    const commonName = req.query.commonName; // Optional query parameter
 
     try {
         const db = await connectToDB();
@@ -108,16 +107,47 @@ app.get('/data/:collectionName', async (req, res) => {
 
         let data;
         if (commonName) {
-            // If querying with commonName
-            data = await collection.find({ commonName: commonName }).toArray();
+            data = await collection.find({ commonName }).toArray();
         } else {
-            // Fetch all data from the collection
             data = await collection.find().toArray();
         }
 
         res.json(data);
     } catch (error) {
         res.status(500).json({ message: `Error fetching data from collection: ${collectionName}` });
+    }
+});
+
+// Handle password change POST request
+app.post('/change-password', async (req, res) => {
+    const { oldpassword, newpassword, userId } = req.body;
+
+    try {
+        const db = await connectToDB();
+        const usersCollection = db.collection('Users');
+
+        const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const passwordMatch = await bcrypt.compare(oldpassword, user.password);
+
+        if (!passwordMatch) {
+            return res.status(400).json({ message: 'Old password is incorrect' });
+        }
+
+        const hashedNewPassword = await bcrypt.hash(newpassword, saltRounds);
+
+        await usersCollection.updateOne(
+            { _id: new ObjectId(userId) },
+            { $set: { password: hashedNewPassword } }
+        );
+
+        res.json({ message: 'Password changed successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
     }
 });
 

@@ -1,8 +1,7 @@
 const { MongoClient } = require('mongodb');
-require('dotenv').config(); // To load environment variables from a .env file
 
-const mongoUri = process.env.MONGO_URI;
-const dbName = process.env.DB_NAME;
+const mongoUri = 'mongodb+srv://Admin:IMXshfqLgjgzNZwN@originalcluster.g2m81ys.mongodb.net/?retryWrites=true&w=majority&appName=OriginalCluster'; 
+const dbName = 'Capstone'; 
 
 let db;
 
@@ -19,4 +18,4 @@ const connectToDB = async () => {
   }
 };
 
-module.exports = connectToDB
+module.exports = connectToDB;
