@@ -1,8 +1,9 @@
 let grid = Array(3).fill().map(() => Array(3).fill(''));
-let userId = sessionStorage.getItem('loggedInUserId'); // Store userId
+let userId = sessionStorage.getItem('loggedInUserId'); // Retrieve userId
 
 document.addEventListener('DOMContentLoaded', () => {
     userId = sessionStorage.getItem('loggedInUserId'); // Retrieve userId
+
     fetchLayouts(); // Fetch existing layouts on page load
 
     document.getElementById('addPlantButton').addEventListener('click', addPlant);
@@ -47,11 +48,6 @@ function addPlant() {
 function saveLayout() {
     userId = sessionStorage.getItem('loggedInUserId'); // Retrieve userId again before saving
 
-    if (!userId) {
-        alert('User not logged in');
-        return;
-    }
-
     const layoutName = prompt('Enter layout name:');
     fetch(`/user/${userId}/layout`, {
         method: 'POST',
@@ -67,11 +63,6 @@ function saveLayout() {
 
 function fetchLayouts() {
     userId = sessionStorage.getItem('loggedInUserId'); // Retrieve userId again before fetching layouts
-
-    if (!userId) {
-        alert('User not logged in');
-        return;
-    }
 
     fetch(`/user/${userId}/layouts`)
         .then(response => response.json())
