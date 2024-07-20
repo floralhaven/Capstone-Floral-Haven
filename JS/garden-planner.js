@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listeners for buttons
     document.getElementById('addPlantButton').addEventListener('click', addPlant);
+    document.getElementById('removePlantButton').addEventListener('click', removePlant);
     document.getElementById('saveLayoutButton').addEventListener('click', saveLayout);
 });
 
@@ -26,17 +27,19 @@ function addPlant() {
                 for (let i = 0; i < grid.length; i++) {
                     for (let j = 0; j < grid[i].length; j++) {
                         if (grid[i][j] === '') {
-                            grid[i][j] = data[0].image;
-                            const cellDiv = document.querySelector(`.grid-item[data-row="${i}"][data-col="${j}"]`);
-                            cellDiv.innerHTML = '';
-                            cellDiv.appendChild(img);
-                            return;
+                            grid[i][j] = plantName;
+                            const cell = document.querySelector(`.grid-item[data-row="${i}"][data-col="${j}"]`);
+                            if (cell) {
+                                cell.appendChild(img);
+                                return;
+                            } else {
+                                console.error(`Grid cell not found for row ${i}, col ${j}`);
+                            }
                         }
                     }
                 }
-                alert('The garden planner is full. Please save your layout or remove a plant to add more.');
             } else {
-                alert('Plant not found');
+                console.error('Plant not found in the database');
             }
         })
         .catch(error => {
@@ -44,63 +47,73 @@ function addPlant() {
         });
 }
 
+function removePlant() {
+    const plantName = document.getElementById('plant-name').value;
+
+    // Find the plant in the grid and remove it
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[i].length; j++) {
+            if (grid[i][j] === plantName) {
+                grid[i][j] = '';
+                const cell = document.querySelector(`.grid-item[data-row="${i}"][data-col="${j}"]`);
+                if (cell && cell.firstChild) {
+                    cell.removeChild(cell.firstChild);
+                    return;
+                }
+            }
+        }
+    }
+}
+
 function saveLayout() {
-    const token = localStorage.getItem('token'); // Retrieve the JWT from storage
+    const layoutName = document.getElementById('layout-name').value;
+    const username = sessionStorage.getItem('loggedInUser'); // Get the username from session storage
 
-    if (!token) {
-        alert('User not logged in');
+    if (!username) {
+        console.error('User not logged in');
         return;
     }
 
-    const layoutName = prompt('Enter layout name:');
-    if (!layoutName) {
-        alert('Layout name is required');
-        return;
-    }
-
-    const layoutData = { name: layoutName, grid };
-
-    fetch('http://localhost:3000/data/layouts', { // Updated endpoint
+    fetch('http://localhost:3000/user/layout', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}` // Include the JWT in the Authorization header
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(layoutData)
+        body: JSON.stringify({
+            username,
+            layoutName,
+            layout: grid
+        })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message === 'Layout saved successfully!') {
-            console.log('Layout saved:', data);
-            fetchLayouts(); // Refresh the layouts
-        } else {
-            alert('Failed to save layout: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error saving layout:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log('Layout saved successfully:', data);
+            fetchLayouts(); // Refresh the layouts display after saving
+        })
+        .catch(error => {
+            console.error('Error saving layout:', error);
+        });
 }
 
 function fetchLayouts() {
-    const userId = sessionStorage.getItem('userId'); // Assuming you store userId
+    const username = sessionStorage.getItem('loggedInUser'); // Get the username from session storage
 
-    if (!userId) {
-        alert('User not logged in');
+    if (!username) {
+        console.error('User not logged in');
         return;
     }
 
-    fetch(`http://localhost:3000/data/layouts/${userId}`)
+    fetch(`http://localhost:3000/user/layouts?username=${username}`)
         .then(response => response.json())
-        .then(layouts => {
-            console.log('User layouts:', layouts);
-            // Render layouts on the page
-            const layoutsContainer = document.getElementById('layouts');
-            layoutsContainer.innerHTML = ''; // Clear previous layouts
-            layouts.forEach(layout => {
+        .then(data => {
+            const savedLayoutsDiv = document.getElementById('saved-layouts');
+            savedLayoutsDiv.innerHTML = ''; // Clear existing layouts
+
+            data.forEach(layout => {
                 const layoutDiv = document.createElement('div');
-                layoutDiv.innerHTML = `<h3>${layout.name}</h3>`;
-                layoutsContainer.appendChild(layoutDiv);
+                layoutDiv.classList.add('saved-layout');
+                layoutDiv.textContent = layout.layoutName;
+                savedLayoutsDiv.appendChild(layoutDiv);
             });
         })
         .catch(error => {

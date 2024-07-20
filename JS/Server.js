@@ -3,56 +3,52 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken'); // Import the JWT library
-const { ObjectId } = require('mongodb');
-const connectToDB = require('./db');
 const mongoose = require('mongoose');
+const connectToDB = require('./db'); 
 
 const app = express();
 const PORT = 3000;
 
+const saltRounds = 10;
+
+// Connect to MongoDB
+connectToDB();
+
+// Define User and Layout Schemas
 const userSchema = new mongoose.Schema({
+    email:{ type: String, required: true, unique: true },
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true }
 });
 
-const User = mongoose.model('Users', userSchema);
+const layoutSchema = new mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true },
+    username: { type: String, required: true },
+    layoutName: { type: String, required: true },
+    grid: { type: Array, required: true }
+});
 
+const User = mongoose.model('User', userSchema);
+const Layout = mongoose.model('Layout', layoutSchema);
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '..')));
 
-const saltRounds = 10;
-const JWT_SECRET = '50ba26ff8b7266b06595408f3ea8a1670d6f021aa7c27adb8741cacbccb587c50d7105cf32681b2d0eea0de68d5293dbce69f666061810cedac7fdcc218ee2f7'; 
-
-// Middleware to verify JWT
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
-    if (token == null) return res.status(401).json({ message: 'No token provided' });
-
-    jwt.verify(token, JWT_SECRET, (err, user) => {
-        if (err) return res.status(403).json({ message: 'Invalid token' });
-
-        req.user = user;
-        next();
-    });
-}
-
 // Handle sign-up POST request
 app.post('/signup', async (req, res) => {
     try {
-        const userData = req.body;
-        const db = await connectToDB();
-        const usersCollection = db.collection('Users');
+        const { email, username, password } = req.body;
 
-        const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        userData.password = hashedPassword;
+        const newUser = new User({
+            email,
+            username,
+            password: hashedPassword
+        });
 
-        await usersCollection.insertOne(userData);
+        await newUser.save();
         res.json({ message: 'User signed up successfully!' });
     } catch (error) {
         res.status(500).json({ message: 'Error saving user data' });
@@ -64,76 +60,82 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        // Find user in database
         const user = await User.findOne({ username });
 
         if (!user) {
             return res.status(400).json({ message: 'Invalid username or password' });
         }
 
-        // Compare passwords
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
             return res.status(400).json({ message: 'Invalid username or password' });
         }
 
-        // Generate JWT
-        const token = jwt.sign({ userId: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
-
-        res.json({ token });
+        res.json({ message: 'Login successful', username });
     } catch (error) {
         console.error('Error logging in:', error);
         res.status(500).json({ message: 'Server error' });
     }
 });
 
-
 // Handle logout
 app.post('/logout', (req, res) => {
     res.json({ message: 'Logout successful' });
 });
 
-// Handle garden layout saving POST request
-// Fetch layouts by user ID
-app.get('/data/layouts/:userId', authenticateToken, async (req, res) => {
-    try {
-        const { userId } = req.params;
-        const db = await connectToDB();
-        const layoutsCollection = db.collection('Layouts');
+// Handle saving a layout
+app.post('/user/layout', async (req, res) => {
+    const { layoutName, grid, username } = req.body;
 
-        const layouts = await layoutsCollection.find({ userId }).toArray();
-        res.json(layouts);
+    try {
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return res.status(400).json({ message: 'User not found' });
+        }
+
+        const newLayout = new Layout({
+            userId: user._id,
+            username: user.username,
+            layoutName,
+            grid
+        });
+
+        await newLayout.save();
+
+        res.status(201).json({ message: 'Layout saved successfully!', layout: newLayout });
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching layouts' });
+        console.error('Error saving layout:', error);
+        res.status(500).json({ message: 'Server error' });
     }
 });
 
-// Save a new layout
-app.post('/data/layouts', authenticateToken, async (req, res) => {
+// Handle fetching layouts for a user
+app.get('/user/:username/layouts', async (req, res) => {
+    const { username } = req.params;
+
     try {
-        const { userId } = req.user; // Get userId from JWT
-        const layoutData = req.body;
-        const db = await connectToDB();
-        const layoutsCollection = db.collection('Layouts');
+        const layouts = await Layout.find({ username });
 
-        layoutData.userId = userId; // Associate layout with user
-        await layoutsCollection.insertOne(layoutData);
+        if (!layouts) {
+            return res.status(404).json({ message: 'No layouts found' });
+        }
 
-        res.json({ message: 'Layout saved successfully!' });
+        res.json(layouts);
     } catch (error) {
-        res.status(500).json({ message: 'Error saving layout' });
+        console.error('Error fetching layouts:', error);
+        res.status(500).json({ message: 'Server error' });
     }
 });
 
 // Endpoint to get data from a specific collection
 app.get('/data/:collectionName', async (req, res) => {
-    const collectionName = req.params.collectionName;
-    const commonName = req.query.commonName; // Optional query parameter
+    const { collectionName } = req.params;
+    const { commonName } = req.query;
 
     try {
-        const db = await connectToDB();
-        const collection = db.collection(collectionName);
+        const collection = mongoose.connection.collection(collectionName);
 
         let data;
         if (commonName) {
@@ -148,18 +150,12 @@ app.get('/data/:collectionName', async (req, res) => {
     }
 });
 
+// Handle password change
 app.post('/change-password', async (req, res) => {
     const { oldpassword, newpassword, userId } = req.body;
 
     try {
-        const db = await connectToDB();
-        const usersCollection = db.collection('Users');
-
-        if (!userId || !oldpassword || !newpassword) {
-            return res.status(400).json({ message: 'Missing required fields' });
-        }
-
-        const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+        const user = await User.findById(userId);
 
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
@@ -173,18 +169,8 @@ app.post('/change-password', async (req, res) => {
 
         const hashedNewPassword = await bcrypt.hash(newpassword, saltRounds);
 
-        const result = await usersCollection.updateOne(
-            { _id: new ObjectId(userId) },
-            { $set: { password: hashedNewPassword } }
-        );
-
-        if (result.matchedCount === 0) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        if (result.modifiedCount === 0) {
-            return res.status(500).json({ message: 'Password update failed' });
-        }
+        user.password = hashedNewPassword;
+        await user.save();
 
         res.json({ message: 'Password changed successfully' });
     } catch (error) {

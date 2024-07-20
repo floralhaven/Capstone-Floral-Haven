@@ -1,30 +1,26 @@
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('login-form').addEventListener('submit', (event) => {
-        event.preventDefault();
+document.getElementById('login-form').addEventListener('submit', function (event) {
+    event.preventDefault();
 
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-        fetch('http://localhost:3000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, password })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            localStorage.setItem('token', data.token);
-            window.location.href = '/profile.html'; // Redirect to profile page
-        })
-        .catch(error => {
-            console.error('Error logging in:', error);
+    fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === 'Login successful') {
+            sessionStorage.setItem('loggedInUser', username); // Store the username in session storage
+            window.location.href = '/profile.html'; // Redirect to profile page after successful login
+        } else {
             document.getElementById('error').style.display = 'block';
-        });
+        }
+    })
+    .catch(error => {
+        console.error('Error logging in:', error);
     });
 });

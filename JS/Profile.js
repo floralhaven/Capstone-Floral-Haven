@@ -1,63 +1,31 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const token = localStorage.getItem('token');
-    const userId = sessionStorage.getItem('userId'); // Assuming you store userId
+document.addEventListener('DOMContentLoaded', function() {
+    const profileButton = document.getElementById('profileButton');
+    const logoutButton = document.getElementById('logoutbtn');
 
-    if (!token || !userId) {
-        alert('User not logged in');
-        window.location.href = 'Login.html'; // Correct path
-        return;
+    if (profileButton) {
+        profileButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            // Check if user is logged in
+            const isLoggedIn = checkLoggedIn();
+            if (isLoggedIn) {
+                window.location.href = 'profile.html'; 
+            } else {
+                window.location.href = 'guestprofile.html'; 
+            }
+        });
     }
 
-    fetchLayouts(); // Fetch and display layouts
-
-    document.getElementById('logoutbtn').addEventListener('click', logout); // Correct ID
-});
-
-function fetchLayouts() {
-    const userId = sessionStorage.getItem('userId'); // Assuming you store userId
-    const token = localStorage.getItem('token');
-
-    fetch(`http://localhost:3000/data/layouts/${userId}`, { // Updated endpoint
-        headers: {
-            'Authorization': `Bearer ${token}` // Include JWT in header
-        }
-    })
-    .then(response => response.json())
-    .then(layouts => {
-        console.log('User layouts:', layouts);
-        // Render layouts on the page
-        const layoutsContainer = document.getElementById('layouts');
-        layoutsContainer.innerHTML = ''; // Clear previous layouts
-        layouts.forEach(layout => {
-            const layoutDiv = document.createElement('div');
-            layoutDiv.innerHTML = `<h3>${layout.name}</h3>`;
-            layoutsContainer.appendChild(layoutDiv);
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            // Clear session storage to log out the user
+            sessionStorage.removeItem('loggedInUser');
+            // Redirect to the home page
+            window.location.href = 'index.html';
         });
-    })
-    .catch(error => {
-        console.error('Error fetching layouts:', error);
-    });
-}
+    }
 
-function logout() {
-    fetch('http://localhost:3000/logout', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message === 'Logout successful') {
-            localStorage.removeItem('token');
-            sessionStorage.removeItem('userId');
-            window.location.href = 'Login.html'; // Correct path
-        } else {
-            alert('Logout failed');
-        }
-    })
-    .catch(error => {
-        console.error('Error during logout:', error);
-    });
-}
+    function checkLoggedIn() {
+        return sessionStorage.getItem('loggedInUser') !== null;
+    }
+});

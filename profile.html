@@ -3,12 +3,11 @@
 <head>
     <title>Floral Haven - Profile</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="pollinators, bees, bats, butterflies, plants">
     <link rel="stylesheet" href="CSS/Main.css">
     <link rel="icon" type="image/x-icon" href="Images/Icon.png">
 </head>
-
 <body>
     <aside class="navbar">
         <nav>
@@ -31,35 +30,41 @@
             <br>
             <span id="guestProfileLink" style="display:none;"><a href="guestprofile.html"><button class="btn">Guest Profile</button></a></span>
             <span id="logoutLink"><a href="#"><button class="btn">Logout</button></a></span>
-        </nav>    
+        </nav>
     </aside>
 
     <div class="profile">
         <h1>Profile</h1>
-    
+
         <button class="logoutbtn" id="logoutbtn">log out</button>
         <a href="Settings.html"><button class="settingsbtn" id="settingsbtn">Settings</button></a>
-        <br/>
+        <br />
 
         <div class="garden-planner">
-            <label for="collection-select">Choose a collection:</label>
+            <label for="plant-name">Plant Name:</label>
+            <input type="text" id="plant-name">
+            <button id="addPlantButton">Add Plant</button>
+            <button id="removePlantButton">Remove Plant</button>
+            <br>
+            <br>
+
+            <label for="collection-select">Collection:</label>
             <select id="collection-select">
-                <option value="bats">Bats</option>
                 <option value="bees">Bees</option>
+                <option value="bats">Bats</option>
                 <option value="butterflies">Butterflies</option>
                 <option value="hummingbirds">Hummingbirds</option>
             </select>
-            <br/>
+            <br>
+            <br>
 
-            <label for="plant-name">Enter plant name:</label>
-            <input type="text" id="plant-name">
-            <button id="addPlantButton">Add Plant</button>
-            <br/>
-            
+            <label for="layoutname">Layout Name:</label>
+            <input type="text" id="layout-name"> <!-- Updated id to match the JS -->
             <button id="saveLayoutButton">Save Layout</button>
-
-            <div id="plant-grid" class="grid-container">
-                <!-- Grid cells -->
+            <br>
+            <br>
+            
+            <div class="grid-container" id="garden-grid">
                 <div class="grid-item" data-row="0" data-col="0"></div>
                 <div class="grid-item" data-row="0" data-col="1"></div>
                 <div class="grid-item" data-row="0" data-col="2"></div>
@@ -70,17 +75,18 @@
                 <div class="grid-item" data-row="2" data-col="1"></div>
                 <div class="grid-item" data-row="2" data-col="2"></div>
             </div>
-            <br/>
+            <br>
+
             <h3>Your Layouts</h3>
-            <div id="layouts"></div>
+            <div id="saved-layouts" class="saved-layouts"></div>
         </div>
     </div>
 
-    <footer class="non-infofooter">
-        <p>© Floral Haven. All rights are reserved.<p>
+    <footer>
+        <p>© Floral Haven. All rights are reserved.</p>
     </footer>
     <script src="JS/nav.js"></script>
     <script src="JS/profile.js"></script>
     <script src="JS/garden-planner.js"></script>
-</body>    
+</body>
 </html>
