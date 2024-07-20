@@ -1,35 +1,45 @@
 const express = require('express');
-const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken'); // Import the JWT library
 const { ObjectId } = require('mongodb');
-const connectToDB = require('./db'); 
+const connectToDB = require('./db');
+const mongoose = require('mongoose');
 
 const app = express();
 const PORT = 3000;
+
+const userSchema = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true }
+});
+
+const User = mongoose.model('Users', userSchema);
+
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '..')));
 
-const saltRounds = 10; // Number of salt rounds for bcrypt
+const saltRounds = 10;
+const JWT_SECRET = '50ba26ff8b7266b06595408f3ea8a1670d6f021aa7c27adb8741cacbccb587c50d7105cf32681b2d0eea0de68d5293dbce69f666061810cedac7fdcc218ee2f7'; 
 
-app.use(session({
-    secret: 'kahfakegrweu32iu4y98324yhkewrkhwg32iu4y298e7294379', 
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true, maxAge: 24 * 60 * 60 * 1000 }
-}));
+// Middleware to verify JWT
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
 
-app.get('/check-session', (req, res) => {
-    if (req.session.userId) {
-        res.json({ loggedIn: true });
-    } else {
-        res.json({ loggedIn: false });
-    }
-});
+    if (token == null) return res.status(401).json({ message: 'No token provided' });
+
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+        if (err) return res.status(403).json({ message: 'Invalid token' });
+
+        req.user = user;
+        next();
+    });
+}
 
 // Handle sign-up POST request
 app.post('/signup', async (req, res) => {
@@ -51,80 +61,68 @@ app.post('/signup', async (req, res) => {
 
 // Handle login POST request
 app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
     try {
-        const loginData = req.body;
-        const db = await connectToDB();
-        const usersCollection = db.collection('Users');
+        // Find user in database
+        const user = await User.findOne({ username });
 
-        const user = await usersCollection.findOne({ username: loginData.username });
-
-        if (user) {
-            const passwordMatch = await bcrypt.compare(loginData.password, user.password);
-
-            if (passwordMatch) {
-                res.json({
-                    success: true,
-                    message: 'Login successful',
-                    userId: user._id // Ensure user ID is included in the response
-                });
-            } else {
-                res.json({ success: false, message: 'Invalid username or password' });
-            }
-        } else {
-            res.json({ success: false, message: 'Invalid username or password' });
+        if (!user) {
+            return res.status(400).json({ message: 'Invalid username or password' });
         }
+
+        // Compare passwords
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(400).json({ message: 'Invalid username or password' });
+        }
+
+        // Generate JWT
+        const token = jwt.sign({ userId: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
+
+        res.json({ token });
     } catch (error) {
-        res.status(500).json({ message: 'Error reading user data' });
+        console.error('Error logging in:', error);
+        res.status(500).json({ message: 'Server error' });
     }
 });
 
 
 // Handle logout
 app.post('/logout', (req, res) => {
-    req.session.destroy((err) => {
-        if (err) {
-            return res.status(500).json({ message: 'Logout failed' });
-        }
-        res.clearCookie('connect.sid'); 
-        res.json({ message: 'Logout successful' });
-    });
+    res.json({ message: 'Logout successful' });
 });
 
 // Handle garden layout saving POST request
-app.post('/user/:userId/layout', async (req, res) => {
+// Fetch layouts by user ID
+app.get('/data/layouts/:userId', authenticateToken, async (req, res) => {
     try {
         const { userId } = req.params;
-        const layoutData = req.body;
-        const db = await connectToDB();
-        const usersCollection = db.collection('Users');
-
-        const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
-
-        if (user) {
-            user.layouts.push(layoutData);
-            await usersCollection.updateOne(
-                { _id: new ObjectId(userId) },
-                { $set: { layouts: user.layouts } }
-            );
-            res.json({ message: 'Layout saved successfully!' });
-        } else {
-            res.status(404).json({ message: 'User not found' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: 'Error saving layout data' });
-    }
-});
-
-// Fetch layouts by user ID
-app.get('/user/:userId/layouts', async (req, res) => {
-    const userId = req.params.userId;
-    try {
         const db = await connectToDB();
         const layoutsCollection = db.collection('Layouts');
+
         const layouts = await layoutsCollection.find({ userId }).toArray();
         res.json(layouts);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching user layouts' });
+        res.status(500).json({ message: 'Error fetching layouts' });
+    }
+});
+
+// Save a new layout
+app.post('/data/layouts', authenticateToken, async (req, res) => {
+    try {
+        const { userId } = req.user; // Get userId from JWT
+        const layoutData = req.body;
+        const db = await connectToDB();
+        const layoutsCollection = db.collection('Layouts');
+
+        layoutData.userId = userId; // Associate layout with user
+        await layoutsCollection.insertOne(layoutData);
+
+        res.json({ message: 'Layout saved successfully!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error saving layout' });
     }
 });
 
@@ -154,27 +152,22 @@ app.post('/change-password', async (req, res) => {
     const { oldpassword, newpassword, userId } = req.body;
 
     try {
-        console.log('Received request to change password:', { oldpassword, newpassword, userId });
-
         const db = await connectToDB();
         const usersCollection = db.collection('Users');
 
         if (!userId || !oldpassword || !newpassword) {
-            console.log('Missing required fields');
             return res.status(400).json({ message: 'Missing required fields' });
         }
 
         const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
 
         if (!user) {
-            console.log('User not found');
             return res.status(404).json({ message: 'User not found' });
         }
 
         const passwordMatch = await bcrypt.compare(oldpassword, user.password);
 
         if (!passwordMatch) {
-            console.log('Old password is incorrect');
             return res.status(400).json({ message: 'Old password is incorrect' });
         }
 
@@ -184,8 +177,6 @@ app.post('/change-password', async (req, res) => {
             { _id: new ObjectId(userId) },
             { $set: { password: hashedNewPassword } }
         );
-
-        console.log('Database update result:', result);
 
         if (result.matchedCount === 0) {
             return res.status(404).json({ message: 'User not found' });
@@ -197,7 +188,6 @@ app.post('/change-password', async (req, res) => {
 
         res.json({ message: 'Password changed successfully' });
     } catch (error) {
-        console.error('Error changing password:', error);
         res.status(500).json({ message: 'Server error' });
     }
 });

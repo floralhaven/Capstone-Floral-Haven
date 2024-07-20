@@ -1,42 +1,63 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const profileButton = document.getElementById('profileButton');
-    const logoutButton = document.getElementById('logoutbtn');
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+    const userId = sessionStorage.getItem('userId'); // Assuming you store userId
 
-    if (profileButton) {
-        profileButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            // Check if user is logged in
-            fetch('/check-session', { method: 'GET' }) // Implement this endpoint on the server
-                .then(response => response.json())
-                .then(data => {
-                    if (data.loggedIn) {
-                        window.location.href = 'profile.html'; 
-                    } else {
-                        window.location.href = 'guestprofile.html'; 
-                    }
-                })
-                .catch(error => {
-                    console.error('Error checking session:', error);
-                });
-        });
+    if (!token || !userId) {
+        alert('User not logged in');
+        window.location.href = 'Login.html'; // Correct path
+        return;
     }
 
-    if (logoutButton) {
-        logoutButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            fetch('/logout', { method: 'POST' })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.message === 'Logout successful') {
-                        sessionStorage.removeItem('loggedInUser'); // Clear session storage
-                        window.location.href = 'index.html'; // Redirect to home page
-                    } else {
-                        console.error('Logout failed:', result.message); // Use console instead of alert
-                    }
-                })
-                .catch(error => {
-                    console.error('Error logging out:', error);
-                });
-        });
-    }
+    fetchLayouts(); // Fetch and display layouts
+
+    document.getElementById('logoutbtn').addEventListener('click', logout); // Correct ID
 });
+
+function fetchLayouts() {
+    const userId = sessionStorage.getItem('userId'); // Assuming you store userId
+    const token = localStorage.getItem('token');
+
+    fetch(`http://localhost:3000/data/layouts/${userId}`, { // Updated endpoint
+        headers: {
+            'Authorization': `Bearer ${token}` // Include JWT in header
+        }
+    })
+    .then(response => response.json())
+    .then(layouts => {
+        console.log('User layouts:', layouts);
+        // Render layouts on the page
+        const layoutsContainer = document.getElementById('layouts');
+        layoutsContainer.innerHTML = ''; // Clear previous layouts
+        layouts.forEach(layout => {
+            const layoutDiv = document.createElement('div');
+            layoutDiv.innerHTML = `<h3>${layout.name}</h3>`;
+            layoutsContainer.appendChild(layoutDiv);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching layouts:', error);
+    });
+}
+
+function logout() {
+    fetch('http://localhost:3000/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === 'Logout successful') {
+            localStorage.removeItem('token');
+            sessionStorage.removeItem('userId');
+            window.location.href = 'Login.html'; // Correct path
+        } else {
+            alert('Logout failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error during logout:', error);
+    });
+}

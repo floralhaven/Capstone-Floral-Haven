@@ -1,32 +1,30 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const loginForm = document.getElementById('login-form'); // Ensure correct ID
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('login-form').addEventListener('submit', (event) => {
+        event.preventDefault();
 
-    if (loginForm) {
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
 
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    sessionStorage.setItem('loggedInUser', data.userId); // Store user ID
-                    window.location.href = 'Profile.html'; // Redirect to profile page
-                } else {
-                    console.error('Login failed:', data.message); // Use console instead of alert
-                }
-            })
-            .catch(error => {
-                console.error('Error during login:', error);
-            });
+        fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            localStorage.setItem('token', data.token);
+            window.location.href = '/profile.html'; // Redirect to profile page
+        })
+        .catch(error => {
+            console.error('Error logging in:', error);
+            document.getElementById('error').style.display = 'block';
         });
-    }
+    });
 });
