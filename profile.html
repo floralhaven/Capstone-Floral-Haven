@@ -24,7 +24,6 @@
             <a href="Contactus.html"><button class="btn">Contact Us</button></a>
             <br>
             <span id="signupLink"><a href="Signup.html"><button class="btn">Sign up</button></a></span>
-            <br>
             <span id="loginLink"><a href="Login.html"><button class="btn">Login</button></a></span>
             <a href="Profile.html"><button class="btn">Profile</button></a>
             <br>
@@ -41,13 +40,6 @@
         <br />
 
         <div class="garden-planner">
-            <label for="plant-name">Plant Name:</label>
-            <input type="text" id="plant-name">
-            <button id="addPlantButton">Add Plant</button>
-            <button id="removePlantButton">Remove Plant</button>
-            <br>
-            <br>
-
             <label for="collection-select">Collection:</label>
             <select id="collection-select">
                 <option value="bees">Bees</option>
@@ -58,12 +50,19 @@
             <br>
             <br>
 
+            <label for="plant-name">Plant Name:</label>
+            <input type="text" id="plant-name">
+            <button id="addPlantButton">Add Plant</button>
+            <button id="removePlantButton">Remove Plant</button>
+            <br>
+            <br>
+
             <label for="layoutname">Layout Name:</label>
-            <input type="text" id="layout-name"> <!-- Updated id to match the JS -->
+            <input type="text" id="layout-name"> 
             <button id="saveLayoutButton">Save Layout</button>
             <br>
             <br>
-            
+
             <div class="grid-container" id="garden-grid">
                 <div class="grid-item" data-row="0" data-col="0"></div>
                 <div class="grid-item" data-row="0" data-col="1"></div>
