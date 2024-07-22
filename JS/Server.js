@@ -86,7 +86,7 @@ app.post('/logout', (req, res) => {
 
 // Handle saving a layout
 app.post('/user/layout', async (req, res) => {
-    const { layoutName, grid, username } = req.body;
+    const { layoutName, layout, username } = req.body;
 
     try {
         const user = await User.findOne({ username });
@@ -99,7 +99,7 @@ app.post('/user/layout', async (req, res) => {
             userId: user._id,
             username: user.username,
             layoutName,
-            grid
+            grid: layout // Store the layout including the image URLs
         });
 
         await newLayout.save();

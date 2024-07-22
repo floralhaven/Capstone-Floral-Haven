@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function addPlant() {
     const plantName = document.getElementById('plant-name').value;
-    const collection = document.getElementById('collection-select').value;
+    const collection = document.getElementById('collection-select').value; // Get the selected collection
 
     fetch(`http://localhost:3000/data/${collection}?commonName=${plantName}`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
                 const img = document.createElement('img');
-                img.src = data[0].image;
+                img.src = data[0].image; // Use the correct field name for the image
                 img.alt = plantName;
                 img.classList.add('grid-plant');
 
@@ -27,7 +27,10 @@ function addPlant() {
                 for (let i = 0; i < grid.length; i++) {
                     for (let j = 0; j < grid[i].length; j++) {
                         if (grid[i][j] === '') {
-                            grid[i][j] = plantName;
+                            grid[i][j] = {
+                                plantName: plantName,
+                                imageUrl: data[0].image // Store the image URL in the grid
+                            };
                             const cell = document.querySelector(`.grid-item[data-row="${i}"][data-col="${j}"]`);
                             if (cell) {
                                 cell.appendChild(img);
@@ -67,14 +70,14 @@ function removePlant() {
 
 function saveLayout() {
     const layoutName = document.getElementById('layout-name').value;
-    const username = sessionStorage.getItem('loggedInUser');
+    const username = sessionStorage.getItem('loggedInUser'); // Get the username from session storage
 
     if (!username) {
         console.error('User not logged in');
         return;
     }
 
-    console.log('Grid data:', grid); 
+    console.log('Grid data:', grid); // Log the grid data
 
     fetch('http://localhost:3000/user/layout', {
         method: 'POST',
@@ -88,7 +91,6 @@ function saveLayout() {
         })
     })
         .then(response => {
-            console.log('Response:', response);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
