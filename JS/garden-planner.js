@@ -118,11 +118,10 @@ function fetchLayouts() {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            return response.text(); // Read response as text
+            return response.json(); // Read response as JSON
         })
-        .then(text => {
+        .then(data => {
             try {
-                const data = JSON.parse(text); // Attempt to parse JSON
                 const savedLayoutsDiv = document.getElementById('saved-layouts');
                 savedLayoutsDiv.innerHTML = ''; // Clear existing layouts
 
@@ -130,13 +129,47 @@ function fetchLayouts() {
                     const layoutDiv = document.createElement('div');
                     layoutDiv.classList.add('saved-layout');
                     layoutDiv.textContent = layout.layoutName;
+                    layoutDiv.addEventListener('click', () => {
+                        console.log('Loading layout:', layout.layoutName, layout.grid); // Debugging log
+                        loadLayout(layout.grid);
+                    });
                     savedLayoutsDiv.appendChild(layoutDiv);
                 });
             } catch (error) {
-                console.error('Error parsing JSON:', error);
+                console.error('Error processing layouts:', error);
             }
         })
         .catch(error => {
             console.error('Error fetching layouts:', error);
         });
+}
+
+function loadLayout(gridLayout) {
+    // Clear the current grid
+    grid.forEach(row => row.fill(''));
+    document.querySelectorAll('.grid-item').forEach(item => item.innerHTML = '');
+
+    console.log('Grid layout to load:', gridLayout); // Debugging log
+
+    // Render the saved layout
+    gridLayout.forEach((row, rowIndex) => {
+        row.forEach((cell, colIndex) => {
+            if (cell && cell.plantName && cell.imageUrl) {
+                const img = document.createElement('img');
+                img.src = cell.imageUrl;
+                img.alt = cell.plantName;
+                img.classList.add('grid-plant');
+
+                const gridItem = document.querySelector(`.grid-item[data-row="${rowIndex}"][data-col="${colIndex}"]`);
+                if (gridItem) {
+                    console.log(`Appending image to row ${rowIndex}, col ${colIndex}:`, img); // Debugging log
+                    gridItem.appendChild(img);
+                } else {
+                    console.error(`Grid cell not found for row ${rowIndex}, col ${colIndex}`);
+                }
+            }
+        });
+    });
+
+    console.log('Layout loaded successfully');
 }
