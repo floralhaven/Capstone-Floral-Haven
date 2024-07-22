@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function addPlant() {
     const plantName = document.getElementById('plant-name').value;
-    const collection = document.getElementById('collection-select').value; // Get the selected collection
+    const collection = document.getElementById('collection-select').value;
 
     fetch(`http://localhost:3000/data/${collection}?commonName=${plantName}`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
                 const img = document.createElement('img');
-                img.src = data[0].image; // Use the correct field name for the image
+                img.src = data[0].image;
                 img.alt = plantName;
                 img.classList.add('grid-plant');
 
@@ -67,12 +67,14 @@ function removePlant() {
 
 function saveLayout() {
     const layoutName = document.getElementById('layout-name').value;
-    const username = sessionStorage.getItem('loggedInUser'); // Get the username from session storage
+    const username = sessionStorage.getItem('loggedInUser');
 
     if (!username) {
         console.error('User not logged in');
         return;
     }
+
+    console.log('Grid data:', grid); 
 
     fetch('http://localhost:3000/user/layout', {
         method: 'POST',
@@ -85,7 +87,13 @@ function saveLayout() {
             layout: grid
         })
     })
-        .then(response => response.json())
+        .then(response => {
+            console.log('Response:', response);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             console.log('Layout saved successfully:', data);
             fetchLayouts(); // Refresh the layouts display after saving
@@ -103,18 +111,28 @@ function fetchLayouts() {
         return;
     }
 
-    fetch(`http://localhost:3000/user/layouts?username=${username}`)
-        .then(response => response.json())
-        .then(data => {
-            const savedLayoutsDiv = document.getElementById('saved-layouts');
-            savedLayoutsDiv.innerHTML = ''; // Clear existing layouts
+    fetch(`http://localhost:3000/user/${username}/layouts`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.text(); // Read response as text
+        })
+        .then(text => {
+            try {
+                const data = JSON.parse(text); // Attempt to parse JSON
+                const savedLayoutsDiv = document.getElementById('saved-layouts');
+                savedLayoutsDiv.innerHTML = ''; // Clear existing layouts
 
-            data.forEach(layout => {
-                const layoutDiv = document.createElement('div');
-                layoutDiv.classList.add('saved-layout');
-                layoutDiv.textContent = layout.layoutName;
-                savedLayoutsDiv.appendChild(layoutDiv);
-            });
+                data.forEach(layout => {
+                    const layoutDiv = document.createElement('div');
+                    layoutDiv.classList.add('saved-layout');
+                    layoutDiv.textContent = layout.layoutName;
+                    savedLayoutsDiv.appendChild(layoutDiv);
+                });
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+            }
         })
         .catch(error => {
             console.error('Error fetching layouts:', error);
