@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addPlantButton').addEventListener('click', addPlant);
     document.getElementById('removePlantButton').addEventListener('click', removePlant);
     document.getElementById('saveLayoutButton').addEventListener('click', saveLayout);
+    document.getElementById('clearLayoutButton').addEventListener('click', clearGrid);
 });
 
 function addPlant() {
@@ -19,7 +20,7 @@ function addPlant() {
         .then(data => {
             if (data.length > 0) {
                 const img = document.createElement('img');
-                img.src = data[0].image; // Use the correct field name for the image
+                img.src = data[0].image; 
                 img.alt = plantName;
                 img.classList.add('grid-plant');
 
@@ -172,4 +173,14 @@ function loadLayout(gridLayout) {
     });
 
     console.log('Layout loaded successfully');
+}
+
+function clearGrid() {
+    // Clear the grid array
+    grid.forEach(row => row.fill(''));
+
+    // Clear the DOM elements
+    document.querySelectorAll('.grid-item').forEach(item => item.innerHTML = '');
+
+    console.log('Grid has been cleared'); // Debugging log
 }
