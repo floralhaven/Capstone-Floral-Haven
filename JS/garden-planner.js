@@ -6,9 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listeners for buttons
     document.getElementById('addPlantButton').addEventListener('click', addPlant);
-    document.getElementById('removePlantButton').addEventListener('click', removePlant);
     document.getElementById('saveLayoutButton').addEventListener('click', saveLayout);
-    document.getElementById('clearLayoutButton').addEventListener('click', clearGrid);
+    document.getElementById('clearLayoutButton').addEventListener('click', clearGrid); 
 });
 
 function addPlant() {
@@ -20,9 +19,10 @@ function addPlant() {
         .then(data => {
             if (data.length > 0) {
                 const img = document.createElement('img');
-                img.src = data[0].image; 
+                img.src = data[0].image; // Use the correct field name for the image
                 img.alt = plantName;
                 img.classList.add('grid-plant');
+                img.addEventListener('click', () => removePlant(img)); // Add event listener to remove the plant
 
                 // Find the first empty cell in the grid
                 for (let i = 0; i < grid.length; i++) {
@@ -51,13 +51,12 @@ function addPlant() {
         });
 }
 
-function removePlant() {
-    const plantName = document.getElementById('plant-name').value;
 
+function removePlant(imgElement) {
     // Find the plant in the grid and remove it
     for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid[i].length; j++) {
-            if (grid[i][j] === plantName) {
+            if (grid[i][j] && grid[i][j].imageUrl === imgElement.src) {
                 grid[i][j] = '';
                 const cell = document.querySelector(`.grid-item[data-row="${i}"][data-col="${j}"]`);
                 if (cell && cell.firstChild) {
@@ -68,6 +67,7 @@ function removePlant() {
         }
     }
 }
+
 
 function saveLayout() {
     const layoutName = document.getElementById('layout-name').value;
