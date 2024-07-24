@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const connectToDB = require('./db'); 
+const connectToDB = require('./db');
 
 const app = express();
 const PORT = 3000;
@@ -16,9 +16,22 @@ connectToDB();
 
 // Define User and Layout Schemas
 const userSchema = new mongoose.Schema({
-    email:{ type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
     username: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    favorites: [
+        {
+            plantId: String,
+            commonName: String,
+            scientificName: String,
+            safety: {
+                cats: String,
+                dogs: String
+            },
+            image: String,
+            collection: String
+        }
+    ]
 });
 
 const layoutSchema = new mongoose.Schema({
@@ -126,6 +139,70 @@ app.get('/user/:username/layouts', async (req, res) => {
     } catch (error) {
         console.error('Error fetching layouts:', error);
         res.status(500).json({ message: 'Server error' });
+    }
+});
+
+app.post('/user/:username/favorites', async (req, res) => {
+    const { username } = req.params;
+    const { plantId, favorited, commonName, scientificName, image, collection } = req.body;
+
+    try {
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        if (favorited) {
+            // Add to favorites
+            if (!user.favorites.some(fav => fav.plantId === plantId)) {
+                user.favorites.push({ plantId, commonName, scientificName, image, collection });
+            }
+        } else {
+            // Remove from favorites
+            user.favorites = user.favorites.filter(fav => fav.plantId !== plantId);
+        }
+
+        await user.save();
+
+        res.status(200).json({ message: 'Favorite status updated', favorites: user.favorites });
+    } catch (error) {
+        console.error('Error updating favorite status:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+app.get('/user/:username/favorites', async (req, res) => {
+    try {
+        const username = req.params.username;
+        const user = await User.findOne({ username }).select('favorites').lean();
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred' });
+    }
+});
+
+// DELETE Favorite
+app.delete('/user/:username/favorites/:plantId', async (req, res) => {
+    const { username, plantId } = req.params;
+
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Remove the plant from the favorites array
+        user.favorites = user.favorites.filter(fav => fav.plantId !== plantId);
+        await user.save();
+
+        res.status(200).json({ message: 'Plant removed from favorites' });
+    } catch (error) {
+        console.error('Error removing favorite plant:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 

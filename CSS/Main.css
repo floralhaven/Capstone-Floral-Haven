@@ -40,11 +40,29 @@ button {
 }
 
 /* Button Styles */
-.btn, .contact-form button, .signup-form button, .login-form button, .profile button {
+.unfavorite-btn{
+    background-color: #8ab495;
+    border: 2px solid #272001;
+    padding: 5px;
+    color: #272001;
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn,
+.contact-form button,
+.signup-form button,
+.login-form button,
+.profile button {
     background-color: #646536;
     color: #DCDCDC;
     border: 2px solid #272001;
     cursor: pointer;
+}
+
+.profile button {
+    width: 100px;
 }
 
 .btn {
@@ -55,14 +73,52 @@ button {
     font-size: 20px;
 }
 
-.contact-form button, .signup-form button, .login-form button {
+.contact-form button,
+.signup-form button,
+.login-form button {
     align-self: center;
     padding: 10px 20px;
     border-radius: 20px;
 }
 
-.contact-form button:hover, .signup-form button:hover, .login-form button:hover, .profile button:hover {
+.contact-form button:hover,
+.signup-form button:hover,
+.login-form button:hover,
+.profile button:hover {
     background-color: #818262;
+}
+
+.add-fav {
+    display: inline-block;
+    padding: 5px;
+    width: 40px;
+    cursor: pointer;
+    border: 1px solid #646536;
+    background: -webkit-linear-gradient(top, #646536, #818262) #818262;
+    position: relative;
+    transition: all .5s ease;
+    border-radius: 5%;
+    box-shadow: inset 0 -1px 1px #a7a981;
+}
+
+.add-fav:hover {
+    background: -webkit-linear-gradient(top, #818262, #818262) #818262;
+}
+
+.add-fav .icon-heart {
+    font-size: 24px;
+    color: #dad9d9;
+    position: relative;
+    transition: all .5s ease-in-out;
+}
+
+.add-fav input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.add-fav input[type="checkbox"]:checked+.icon-heart {
+    color: #722b43;
 }
 
 /* Message Section */
@@ -70,7 +126,7 @@ button {
     width: 700px;
     height: 500px;
     margin-top: 155px;
-    margin-left:550px;
+    margin-left: 550px;
     margin-bottom: 150px;
     padding: 20px 18px;
     font-size: 30px;
@@ -90,16 +146,20 @@ button {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: calc(250px * 5 + 40px * 4); /* 5 cards and 4 gaps */
-    margin-left: 200px; /* Centering the container */
+    max-width: calc(250px * 5 + 40px * 4);
+    /* 5 cards and 4 gaps */
+    margin-left: 200px;
+    /* Centering the container */
     padding: 20px;
     gap: 30px;
 }
 
 .card {
-    flex: 0 1 230px; /* Fixing card width */
-    height: 54vh;
+    flex: 0 1 230px;
+    /* Fixing card width */
+    height: 55vh;
     text-align: center;
+    justify-content: center;
     padding: 10px;
     font-size: 18px;
     background-color: #6F9479;
@@ -109,21 +169,58 @@ button {
 
 .card img {
     width: 100%;
-    height: 50%;
+    height: 40%;
     margin-top: 10px;
+}
+
+.favorites{
+    font-size: 30px;
+    margin-bottom: -1%;
+}
+
+.likedplants{
+    display: grid;
+    grid-template-columns: 130px 130px;
+    gap: 16px;
+    width: 50%;
+    height: 195px;
+    padding: 25px;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #646536;
+    border: 2px solid #272001;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.likedplant{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: -30%;
+    margin-bottom: 90%;
+    font-size: 20px;
+    height: 100px;
+}
+
+.likedplant img{
+    margin-top: -20px;
+    margin-bottom: 1px;
+    width: 30%;
+    height: 30%;
 }
 
 /* Garden Planner */
 .grid-container {
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(3, 0fr); 
+    grid-template-columns: repeat(3, 0fr);
     margin-top: 10px;
 }
 
 .grid-item {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border: #272001 2px solid;
     display: flex;
     justify-content: center;
@@ -150,6 +247,10 @@ button {
     margin-left: 10px;
 }
 
+.Gridplants{
+    display: flex;
+}
+
 /* Make the saved-layouts section horizontally scrollable */
 .saved-layouts {
     display: flex;
@@ -167,7 +268,7 @@ button {
     margin-right: 10px;
 }
 
-.saved-layout:hover{
+.saved-layout:hover {
     background-color: #8e8f61;
 }
 
@@ -181,7 +282,9 @@ button {
 }
 
 /* Form Styles */
-.contact-form, .signup-form, .profile {
+.contact-form,
+.signup-form,
+.profile {
     display: flex;
     flex-direction: column;
     padding: 15px;
@@ -220,17 +323,24 @@ button {
     color: #DCDCDC;
 }
 
-.contact-form h2, .signup-form h2, .login-form h2 {
+.contact-form h2,
+.signup-form h2,
+.login-form h2 {
     font-size: 40px;
     text-align: center;
 }
 
-.contact-form label, .signup-form label, .login-form label {
+.contact-form label,
+.signup-form label,
+.login-form label {
     display: block;
     font-size: 20px;
 }
 
-.contact-form input, .contact-form textarea, .signup-form input, .login-form input {
+.contact-form input,
+.contact-form textarea,
+.signup-form input,
+.login-form input {
     width: 90%;
     padding: 10px;
     margin-bottom: 14px;
@@ -239,17 +349,19 @@ button {
     background-color: #DCDCDC;
 }
 
-.signup-form input, .login-form input {
+.signup-form input,
+.login-form input {
     width: 90%;
     margin-bottom: 10px;
 }
 
 .profile {
     width: 620px;
-    height: 790px;
-    margin-top: 13px;
+    height: 770px;
+    margin-top: 22.5px;
     margin-left: 600px;
-    margin-bottom: 13px;
+    margin-bottom: 22.5px;
+    font-size: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -261,7 +373,7 @@ button {
     font-size: 40px;
 }
 
-.Settings{
+.Settings {
     display: flex;
     flex-direction: column;
     width: 350px;
@@ -277,7 +389,7 @@ button {
     color: #DCDCDC;
 }
 
-.Settings h1{
+.Settings h1 {
     text-align: center;
     font-size: 42px;
 }
@@ -292,7 +404,7 @@ button {
 
 .passwordchanger input,
 .passwordchanger label,
-.usernamechanger input, 
+.usernamechanger input,
 .usernamechanger label {
     margin: 5px;
 }
@@ -305,9 +417,13 @@ button {
     cursor: pointer;
 }
 
-.logoutbtn {
+.logoutbtn{
+    margin-bottom: 5px;
+}
+
+.logoutbtn, .settingsbtn {
     width: 100px;
-    height: 40px;
+    font-size: 20px;
 }
 
 /* Footer Styles */
@@ -323,7 +439,7 @@ button {
     text-align: left;
 }
 
-footer{
+footer {
     flex-shrink: 0;
     background-color: #6F9479;
     color: white;
@@ -346,12 +462,14 @@ footer{
     }
 
     .card {
-        flex: 0 1 calc(20% - 20px); /* Adjust card width for 5 cards per row */
-        height: 250px; /* Let height adjust automatically */
+        flex: 0 1 calc(20% - 20px);
+        /* Adjust card width for 5 cards per row */
+        height: 250px;
+        /* Let height adjust automatically */
         overflow-y: scroll;
     }
 
-    .message{
+    .message {
         margin-left: 340px;
         margin-bottom: 183px;
         font-size: 25px;
@@ -359,26 +477,26 @@ footer{
         height: 50%;
     }
 
-    .contact-form{
-        margin-left:300px;
+    .contact-form {
+        margin-left: 300px;
         margin-bottom: 128px;
     }
 
-    .login-form{
+    .login-form {
         margin-left: 400px;
         margin-bottom: 239px;
     }
 
-    .signup-form{
+    .signup-form {
         margin-left: 400px;
         margin-bottom: 149px;
     }
 
-    .profile{
-        margin-left:300px;
+    .profile {
+        margin-left: 300px;
     }
 
-    .non-infofooter{
+    .non-infofooter {
         width: auto;
     }
 }
@@ -392,12 +510,14 @@ footer{
     }
 
     .card {
-        flex: 0 1 calc(30% - 20px); /* Adjust card width for 2 cards per row */
-        height: 250px; /* Let height adjust automatically */
+        flex: 0 1 calc(30% - 20px);
+        /* Adjust card width for 2 cards per row */
+        height: 250px;
+        /* Let height adjust automatically */
         overflow-y: scroll;
     }
 
-    .message{
+    .message {
         margin-left: 340px;
         margin-bottom: 183px;
         font-size: 20px;
@@ -405,34 +525,35 @@ footer{
         height: 50%;
     }
 
-    .contact-form{
-        margin-left:300px;
+    .contact-form {
+        margin-left: 300px;
         margin-bottom: 128px;
         width: 400px;
     }
 
-    .login-form{
+    .login-form {
         margin-left: 340px;
         margin-bottom: 239px;
     }
 
-    .signup-form{
+    .signup-form {
         margin-left: 300px;
         margin-bottom: 149px;
     }
 
-    .profile{
-        margin-left:300px;
-        width: 450px;
+    .profile {
+        margin-left: 300px;
+        width: 400px;
     }
 
-    .non-infofooter{
+    .non-infofooter {
         width: auto;
     }
 }
 
 /* Styles for smaller screens */
 @media screen and (max-width: 764px) {
+
     body,
     html {
         background-color: #F5F5F5;
@@ -484,7 +605,8 @@ footer{
         height: auto;
         font-size: 14px;
         overflow-y: scroll;
-        max-height: 400px; /* Limit the card height */
+        max-height: 400px;
+        /* Limit the card height */
     }
 
     .card img {

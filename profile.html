@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Floral Haven - Profile</title>
     <meta charset="utf-8">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="CSS/Main.css">
     <link rel="icon" type="image/x-icon" href="Images/Icon.png">
 </head>
+
 <body>
     <aside class="navbar">
         <nav>
@@ -28,13 +30,10 @@
             <a href="Profile.html"><button class="btn">Profile</button></a>
             <br>
             <span id="guestProfileLink" style="display:none;"><a href="guestprofile.html"><button class="btn">Guest Profile</button></a></span>
-            <span id="logoutLink"><a href="#"><button class="btn">Logout</button></a></span>
         </nav>
     </aside>
 
     <div class="profile">
-        <h1>Profile</h1>
-
         <button class="logoutbtn" id="logoutbtn">log out</button>
         <a href="Settings.html"><button class="settingsbtn" id="settingsbtn">Settings</button></a>
         <br />
@@ -52,27 +51,30 @@
             <label for="plant-name">Plant Name:</label>
             <input type="text" id="plant-name">
             <button id="addPlantButton">Add Plant</button>
-            <p>In order to delete a plant click on the image you want to remove. Warning it will delete the images before it!</p>
+            <p>In order to delete a plant click on the image you want to remove. 
+                Warning it will delete the images before it!</p>
 
             <label for="layoutname">Layout Name:</label>
-            <input type="text" id="layout-name"> 
+            <input type="text" id="layout-name">
             <button id="saveLayoutButton">Save Layout</button>
-            <button id="clearLayoutButton">Clear Layout</button>
-            <br>
-            <br>
+            <button id="clearLayoutButton">Clear Grid</button>
 
-            <div class="grid-container" id="garden-grid">
-                <div class="grid-item" data-row="0" data-col="0"></div>
-                <div class="grid-item" data-row="0" data-col="1"></div>
-                <div class="grid-item" data-row="0" data-col="2"></div>
-                <div class="grid-item" data-row="1" data-col="0"></div>
-                <div class="grid-item" data-row="1" data-col="1"></div>
-                <div class="grid-item" data-row="1" data-col="2"></div>
-                <div class="grid-item" data-row="2" data-col="0"></div>
-                <div class="grid-item" data-row="2" data-col="1"></div>
-                <div class="grid-item" data-row="2" data-col="2"></div>
+            <p class="favorites">Favorite Plants</p>
+            <div class="Gridplants">
+                <div class="likedplants"></div>
+
+                <div class="grid-container" id="garden-grid">
+                    <div class="grid-item" data-row="0" data-col="0"></div>
+                    <div class="grid-item" data-row="0" data-col="1"></div>
+                    <div class="grid-item" data-row="0" data-col="2"></div>
+                    <div class="grid-item" data-row="1" data-col="0"></div>
+                    <div class="grid-item" data-row="1" data-col="1"></div>
+                    <div class="grid-item" data-row="1" data-col="2"></div>
+                    <div class="grid-item" data-row="2" data-col="0"></div>
+                    <div class="grid-item" data-row="2" data-col="1"></div>
+                    <div class="grid-item" data-row="2" data-col="2"></div>
+                </div>
             </div>
-            <br>
 
             <h3>Click on one of your layouts below and it will pop up in the grid above!</h3>
             <div id="saved-layouts" class="saved-layouts"></div>
@@ -86,4 +88,5 @@
     <script src="JS/profile.js"></script>
     <script src="JS/garden-planner.js"></script>
 </body>
+
 </html>
