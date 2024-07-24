@@ -557,6 +557,7 @@ footer {
     body,
     html {
         background-color: #F5F5F5;
+        overflow-x: hidden;
     }
 
     .navbar {
@@ -593,16 +594,16 @@ footer {
     }
 
     .plant-container {
-        flex-direction: column;
         align-items: center;
+        max-width: calc(150px * 5 + 10px * 4);
         gap: 10px;
         margin-left: 0;
         width: 100%;
     }
 
     .card {
-        width: 90%;
-        height: auto;
+        width: 30%;
+        height: 100%;
         font-size: 14px;
         overflow-y: scroll;
         max-height: 400px;
@@ -610,7 +611,7 @@ footer {
     }
 
     .card img {
-        height: auto;
+        height: 50%;
         width: 100%;
     }
 
