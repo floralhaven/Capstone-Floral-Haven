@@ -1,3 +1,5 @@
+// const baseUrl = "https://chelseabui11.github.io/Capstone-Floral-Haven-API/";
+const baseUrl = "http://localhost:3000/";
 let grid = Array(3).fill().map(() => Array(3).fill(''));
 
 // Event listeners set up when the DOM content is fully loaded
@@ -14,7 +16,7 @@ function addPlant() {
     const plantName = document.getElementById('plant-name').value;
     const collection = document.getElementById('collection-select').value; // Get the selected collection
 
-    fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/data/${collection}?commonName=${plantName}`)
+    fetch(`${baseUrl}data/${collection}?commonName=${plantName}`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
@@ -78,7 +80,7 @@ function saveLayout() {
 
     console.log('Grid data:', grid); // Log the grid data
 
-    fetch('https://chelseabui11.github.io/Capstone-Floral-Haven-API/user/layout', {
+    fetch('${baseUrl}user/layout', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

@@ -1,3 +1,6 @@
+// const baseUrl = "https://chelseabui11.github.io/Capstone-Floral-Haven-API/";
+const baseUrl = "http://localhost:3000/";
+
 document.addEventListener('DOMContentLoaded', () => {
   const category = document.title.toLowerCase().includes('hummingbirds') ? 'hummingbirds' :
       document.title.toLowerCase().includes('bees') ? 'bees' :
@@ -15,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchData(category) {
   try {
-      const response = await fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/data/${category}`);
+    const response = await fetch(`${baseUrl}data/${category}`);
       if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.statusText}`);
       }
@@ -90,7 +93,7 @@ function handleHeartClick(event, plantData, collection) {
 
   const isFavorited = checkbox.checked;
 
-  fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/user/${username}/favorites`, {
+  fetch(`${baseUrl}user/${username}/favorites`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'

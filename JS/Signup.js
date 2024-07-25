@@ -1,3 +1,6 @@
+// const baseUrl = "https://chelseabui11.github.io/Capstone-Floral-Haven-API/";
+const baseUrl = "http://localhost:3000/";
+
 document.addEventListener('DOMContentLoaded', function() {
     const signupForm = document.getElementById('signup-form');
 
@@ -21,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-            const response = await fetch('https://chelseabui11.github.io/Capstone-Floral-Haven-API/signup', {
+            const response = await fetch('${baseUrl}signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -1,3 +1,6 @@
+// const baseUrl = "https://chelseabui11.github.io/Capstone-Floral-Haven-API/";
+const baseUrl = "http://localhost:3000/";
+
 document.addEventListener('DOMContentLoaded', function () {
     const logoutButton = document.getElementById('logoutbtn');
 
@@ -33,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('Fetching favorites for user:', username);
 
         try {
-            const response = await fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/user/${username}/favorites`);
+            const response = await fetch(`${baseUrl}user/${username}/favorites`);
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
             }
@@ -84,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
     
-        fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/user/${username}/favorites/${plantId}`, {
+        fetch(`${baseUrl}user/${username}/favorites/${plantId}`, {
             method: 'DELETE'
         })
         .then(response => response.json())
