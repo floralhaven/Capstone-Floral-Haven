@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('Fetching favorites for user:', username);
 
         try {
-            const response = await fetch(`/user/${username}/favorites`);
+            const response = await fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/user/${username}/favorites`);
             if (!response.ok) {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
             }
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
     
-        fetch(`/user/${username}/favorites/${plantId}`, {
+        fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/user/${username}/favorites/${plantId}`, {
             method: 'DELETE'
         })
         .then(response => response.json())

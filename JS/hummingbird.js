@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchData(category) {
     try {
-        const response = await fetch(`/data/${category}`);
+        const response = await fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/data/${category}`);
         if (!response.ok) {
             throw new Error(`Network response was not ok: ${response.statusText}`);
         }
@@ -90,7 +90,7 @@ function handleHeartClick(event, plantData, collection) {
 
     const isFavorited = checkbox.checked;
 
-    fetch(`/user/${username}/favorites`, {
+    fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/user/${username}/favorites`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -105,16 +105,16 @@ function handleHeartClick(event, plantData, collection) {
             favorited: isFavorited
         })
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Favorite status updated:', data);
-        })
-        .catch(error => {
-            console.error('Error updating favorite status:', error);
-        });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Favorite status updated:', data);
+    })
+    .catch(error => {
+        console.error('Error updating favorite status:', error);
+    });
 }

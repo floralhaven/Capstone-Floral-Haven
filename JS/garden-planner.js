@@ -14,7 +14,7 @@ function addPlant() {
     const plantName = document.getElementById('plant-name').value;
     const collection = document.getElementById('collection-select').value; // Get the selected collection
 
-    fetch(`http://localhost:3000/data/${collection}?commonName=${plantName}`)
+    fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/data/${collection}?commonName=${plantName}`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
@@ -51,7 +51,6 @@ function addPlant() {
         });
 }
 
-
 function removePlant(imgElement) {
     // Find the plant in the grid and remove it
     for (let i = 0; i < grid.length; i++) {
@@ -68,7 +67,6 @@ function removePlant(imgElement) {
     }
 }
 
-
 function saveLayout() {
     const layoutName = document.getElementById('layout-name').value;
     const username = sessionStorage.getItem('loggedInUser'); // Get the username from session storage
@@ -80,7 +78,7 @@ function saveLayout() {
 
     console.log('Grid data:', grid); // Log the grid data
 
-    fetch('http://localhost:3000/user/layout', {
+    fetch('https://chelseabui11.github.io/Capstone-Floral-Haven-API/user/layout', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -114,7 +112,7 @@ function fetchLayouts() {
         return;
     }
 
-    fetch(`http://localhost:3000/user/${username}/layouts`)
+    fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/user/${username}/layouts`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

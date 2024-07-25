@@ -1,28 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
   const category = document.title.toLowerCase().includes('hummingbirds') ? 'hummingbirds' :
-    document.title.toLowerCase().includes('bees') ? 'bees' :
-      document.title.toLowerCase().includes('bats') ? 'bats' :
-        document.title.toLowerCase().includes('butterflies') ? 'butterflies' : '';
+      document.title.toLowerCase().includes('bees') ? 'bees' :
+          document.title.toLowerCase().includes('bats') ? 'bats' :
+              document.title.toLowerCase().includes('butterflies') ? 'butterflies' : '';
 
   if (category) {
-    fetchData(category).then(data => {
-      populateCards(data, category);
-    }).catch(error => {
-      console.error('Error fetching data:', error);
-    });
+      fetchData(category).then(data => {
+          populateCards(data, category);
+      }).catch(error => {
+          console.error('Error fetching data:', error);
+      });
   }
 });
 
 async function fetchData(category) {
   try {
-    const response = await fetch(`/data/${category}`);
-    if (!response.ok) {
-      throw new Error(`Network response was not ok: ${response.statusText}`);
-    }
-    const data = await response.json();
-    return data;
+      const response = await fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/data/${category}`);
+      if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      const data = await response.json();
+      return data;
   } catch (error) {
-    console.error('There has been a problem with your fetch operation:', error);
+      console.error('There has been a problem with your fetch operation:', error);
   }
 }
 
@@ -30,8 +30,8 @@ function populateCards(dataArray, collection) {
   const cardContainer = document.getElementById('plant-container');
   cardContainer.innerHTML = ''; // Clear existing cards
   dataArray.forEach(data => {
-    const card = createCard(data, collection);
-    cardContainer.appendChild(card);
+      const card = createCard(data, collection);
+      cardContainer.appendChild(card);
   });
 }
 
@@ -45,7 +45,7 @@ function createCard(data, collection) {
   card.appendChild(img);
 
   const commonName = document.createElement('h2');
-  commonName.textContent = `${data.commonName}`; 
+  commonName.textContent = `${data.commonName}`;
   card.appendChild(commonName);
 
   const scientificName = document.createElement('p');
@@ -84,37 +84,37 @@ function handleHeartClick(event, plantData, collection) {
   const username = sessionStorage.getItem('loggedInUser');
 
   if (!username) {
-    console.error('User not logged in');
-    return;
+      console.error('User not logged in');
+      return;
   }
 
   const isFavorited = checkbox.checked;
 
-  fetch(`/user/${username}/favorites`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      plantId: plantData._id,
-      commonName: plantData.commonName,
-      scientificName: plantData.scientificName,
-      safety: plantData.safety,
-      image: plantData.image,
-      collection, // Add collection name to request
-      favorited: isFavorited
-    })
+  fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/user/${username}/favorites`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          plantId: plantData._id,
+          commonName: plantData.commonName,
+          scientificName: plantData.scientificName,
+          safety: plantData.safety,
+          image: plantData.image,
+          collection, // Add collection name to request
+          favorited: isFavorited
+      })
   })
-    .then(response => {
+  .then(response => {
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+          throw new Error(`HTTP error! Status: ${response.status}`);
       }
       return response.json();
-    })
-    .then(data => {
+  })
+  .then(data => {
       console.log('Favorite status updated:', data);
-    })
-    .catch(error => {
+  })
+  .catch(error => {
       console.error('Error updating favorite status:', error);
-    });
+  });
 }

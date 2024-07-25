@@ -4,7 +4,7 @@ document.getElementById('login-form').addEventListener('submit', function (event
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    fetch('http://localhost:3000/login', {
+    fetch('https://chelseabui11.github.io/Capstone-Floral-Haven-API/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

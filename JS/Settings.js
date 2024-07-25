@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            fetch('/change-password', {
+            fetch('https://chelseabui11.github.io/Capstone-Floral-Haven-API/change-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
