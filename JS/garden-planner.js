@@ -1,5 +1,4 @@
-// const baseUrl = "https://chelseabui11.github.io/Capstone-Floral-Haven-API/";
-const baseUrl = "http://localhost:3000/";
+
 let grid = Array(3).fill().map(() => Array(3).fill(''));
 
 // Event listeners set up when the DOM content is fully loaded
@@ -80,7 +79,7 @@ function saveLayout() {
 
     console.log('Grid data:', grid); // Log the grid data
 
-    fetch('${baseUrl}user/layout', {
+    fetch(`${baseUrl}user/layout`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -114,7 +113,7 @@ function fetchLayouts() {
         return;
     }
 
-    fetch(`https://chelseabui11.github.io/Capstone-Floral-Haven-API/user/${username}/layouts`)
+    fetch(`${baseUrl}user/${username}/layouts`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
