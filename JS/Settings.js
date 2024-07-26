@@ -3,15 +3,13 @@ const baseUrl = "http://localhost:3000/";
 
 document.addEventListener('DOMContentLoaded', function() {
     const formElement = document.getElementById('changePasswordForm');
-    const userIdField = document.getElementById('userId');
 
-    // Get the user ID from sessionStorage
-    const userId = sessionStorage.getItem('loggedInUser');
-    if (userId && /^[0-9a-fA-F]{24}$/.test(userId)) {
-        userIdField.value = userId;
-    } else {
-        console.error('Invalid or missing User ID in sessionStorage.');
-        alert('Error: Unable to retrieve user ID.');
+    // Get the username from sessionStorage
+    const username = sessionStorage.getItem('loggedInUser');
+
+    if (!username) {
+        alert('Error: Unable to retrieve username. Please log in.');
+        window.location.href = 'Login.html'; // Redirect to login if no username is found
         return;
     }
 
@@ -21,14 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const oldPassword = document.getElementById('oldpassword').value;
             const newPassword = document.getElementById('newpassword').value;
-            const userId = userIdField.value;
 
-            if (!oldPassword || !newPassword || !userId) {
-                alert('Please fill out all fields and make sure you are logged in.');
+            if (!oldPassword || !newPassword) {
+                alert('Please fill out all fields.');
                 return;
             }
 
-            fetch('${baseUrl}change-password', {
+            fetch(`${baseUrl}change-password`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -36,13 +33,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({
                     oldpassword: oldPassword,
                     newpassword: newPassword,
-                    userId: userId // Include userId from hidden field in the request body
+                    username: username // Include username in the request body
                 })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.message === 'Password changed successfully') {
                     alert('Password changed successfully');
+                    window.location.href = 'Profile.html'; // Redirect to profile after successful password change
                 } else {
                     alert('Error: ' + data.message);
                 }
