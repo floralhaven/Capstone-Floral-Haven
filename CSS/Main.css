@@ -272,6 +272,199 @@ button {
     background-color: #8e8f61;
 }
 
+#search-bar {
+    padding: 10px;
+    width: 200px;
+    margin-right: 10px;
+}
+
+#search-button {
+    padding: 10px;
+}
+
+#layouts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+}
+
+.layout-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.layout-card h3, .layout-card h4 {
+    margin: 0 0 10px;
+}
+
+.grid {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid img {
+    width: 80%;
+    height: 80%;
+}
+
+/* Comment Section */
+.comment-section {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #6F9479;
+    border: 2px solid #272001;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #DCDCDC;
+    border: 2px solid #272001;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 2px solid #272001;
+    border-radius: 10px;
+    font-family: "Neucha", cursive;
+    font-size: 16px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.comment-form button {
+    align-self: flex-end;
+    padding: 10px 20px;
+    background-color: #756a3b;
+    border: #272001 solid 2px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.comment-form button:hover {
+    background-color: #5a5133;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #8ab495;
+    border: 2px solid #272001;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.comment .comment-user {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.comment .comment-text {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.comment .comment-date {
+    font-size: 12px;
+    color: #666;
+    align-self: flex-end;
+}
+
+/* Garden Layout CSS */
+.GardenLayout{
+    display: grid;
+    justify-content: center;
+}
+
+#search-bar {
+    padding: 10px;
+    width: 300px;
+    margin-right: 10px;
+}
+
+#search-button {
+    padding: 10px;
+}
+
+#layouts-container {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-self: center;
+}
+
+.layout-card {
+    background-color: #829a82;
+    border:#272001 solid 2px;
+    padding: 10px;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.layout-card h3, .layout-card h4 {
+    margin: 0 0 10px;
+    color: #DCDCDC;
+}
+
+.gridlayout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    margin-bottom: 10px;
+}
+
+.gridlayout img {
+    width: 80%;
+    height: 80%;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #DCDCDC;
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+    z-index: 10;
+}
+
+.grid img:hover + .tooltip {
+    display: block;
+}
+
+.comment-button {
+    padding: 5px 10px;
+    background-color: #756a3b;
+    border:#272001 solid 2px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.comment-button:hover {
+    background-color: #5a5133;
+}
+
 /* Main Content */
 .main-content {
     flex: 1;
