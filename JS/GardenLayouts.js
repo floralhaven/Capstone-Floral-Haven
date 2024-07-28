@@ -1,8 +1,10 @@
-// const baseUrl = "https://chelseabui11.github.io/Capstone-Floral-Haven-API/";
-const baseUrl = "http://localhost:3000/";
+// scripts.js
 
 document.addEventListener('DOMContentLoaded', loadAllLayouts);
 document.getElementById('search-button').addEventListener('click', searchLayouts);
+document.getElementById('clear-button').addEventListener('click', clearSearch);
+
+const baseUrl = 'http://localhost:3000/'; // Ensure this points to your backend server
 
 async function loadAllLayouts() {
     const layouts = await fetchAllLayouts();
@@ -20,6 +22,11 @@ async function searchLayouts() {
     displayLayouts(layouts, username);
 }
 
+function clearSearch() {
+    document.getElementById('search-bar').value = '';
+    loadAllLayouts();
+}
+
 async function fetchAllLayouts() {
     const response = await fetch(`${baseUrl}layouts`);
     const layouts = await response.json();
@@ -27,7 +34,7 @@ async function fetchAllLayouts() {
 }
 
 async function fetchLayoutsByUsername(username) {
-    const response = await fetch(`${baseUrl}layouts?username=${username}`);
+    const response = await fetch(`${baseUrl}user/${username}/layouts`);
     const layouts = await response.json();
     return layouts;
 }
@@ -46,34 +53,38 @@ function displayLayouts(layouts, username = '') {
         card.className = 'layout-card';
 
         const title = document.createElement('h3');
-        title.textContent = layout.name;
+        title.textContent = layout.layoutName;
 
         const user = document.createElement('h4');
         user.textContent = `By: ${layout.username}`;
 
         const grid = document.createElement('div');
-        grid.className = 'grid';
+        grid.className = 'Garden-container';
 
-        layout.plants.forEach(plant => {
-            const cell = document.createElement('div');
-            const img = document.createElement('img');
-            img.src = plant.imgUrl;
-            img.alt = plant.commonName;
+        layout.grid.forEach(row => {
+            row.forEach(plant => {
+                const cell = document.createElement('div');
+                cell.className = 'Garden-item';
 
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            tooltip.textContent = `${plant.commonName} (${plant.collection})`;
+                const img = document.createElement('img');
+                img.src = plant.imageUrl;
+                img.alt = plant.plantName;
 
-            cell.appendChild(img);
-            cell.appendChild(tooltip);
-            grid.appendChild(cell);
+                const tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                tooltip.textContent = plant.plantName;
+
+                cell.appendChild(img);
+                cell.appendChild(tooltip);
+                grid.appendChild(cell);
+            });
         });
 
         const commentButton = document.createElement('button');
         commentButton.className = 'comment-button';
         commentButton.textContent = 'Comment';
         commentButton.addEventListener('click', () => {
-            addComment(layout.username, layout.name);
+            addComment(layout.username, layout.layoutName);
         });
 
         card.appendChild(title);
@@ -110,63 +121,4 @@ async function saveComment(layoutOwner, layoutName, comment) {
     } else {
         alert('Failed to add comment. Please try again.');
     }
-}
-
-// Mock data and functions for testing
-async function fetchAllLayouts() {
-    // Mock data
-    const mockData = [
-        {
-            username: 'john_doe',
-            name: 'Spring Garden',
-            plants: [
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-                { commonName: 'Tulip', collection: 'flowers', imgUrl: 'https://images.pexels.com/photos/36729/tulip-flower-bloom-pink.jpg?cs=srgb&dl=pexels-pixabay-36729.jpg&fm=jpg' },
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-                { commonName: 'Tulip', collection: 'flowers', imgUrl: 'https://images.pexels.com/photos/36729/tulip-flower-bloom-pink.jpg?cs=srgb&dl=pexels-pixabay-36729.jpg&fm=jpg' },
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-                { commonName: 'Tulip', collection: 'flowers', imgUrl: 'https://images.pexels.com/photos/36729/tulip-flower-bloom-pink.jpg?cs=srgb&dl=pexels-pixabay-36729.jpg&fm=jpg' },
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-                { commonName: 'Tulip', collection: 'flowers', imgUrl: 'https://images.pexels.com/photos/36729/tulip-flower-bloom-pink.jpg?cs=srgb&dl=pexels-pixabay-36729.jpg&fm=jpg' },
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-            ]
-        },
-        {
-            username: 'Barbie',
-            name: 'Spring Garden',
-            plants: [
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-                { commonName: 'Tulip', collection: 'flowers', imgUrl: 'https://images.pexels.com/photos/36729/tulip-flower-bloom-pink.jpg?cs=srgb&dl=pexels-pixabay-36729.jpg&fm=jpg' },
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-                { commonName: 'Tulip', collection: 'flowers', imgUrl: 'https://images.pexels.com/photos/36729/tulip-flower-bloom-pink.jpg?cs=srgb&dl=pexels-pixabay-36729.jpg&fm=jpg' },
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-                { commonName: 'Tulip', collection: 'flowers', imgUrl: 'https://images.pexels.com/photos/36729/tulip-flower-bloom-pink.jpg?cs=srgb&dl=pexels-pixabay-36729.jpg&fm=jpg' },
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-                { commonName: 'Tulip', collection: 'flowers', imgUrl: 'https://images.pexels.com/photos/36729/tulip-flower-bloom-pink.jpg?cs=srgb&dl=pexels-pixabay-36729.jpg&fm=jpg' },
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-            ]
-        },
-        {
-            username: 'john_doe',
-            name: 'Spring Garden',
-            plants: [
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-                { commonName: 'Tulip', collection: 'flowers', imgUrl: 'https://images.pexels.com/photos/36729/tulip-flower-bloom-pink.jpg?cs=srgb&dl=pexels-pixabay-36729.jpg&fm=jpg' },
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-                { commonName: 'Tulip', collection: 'flowers', imgUrl: 'https://images.pexels.com/photos/36729/tulip-flower-bloom-pink.jpg?cs=srgb&dl=pexels-pixabay-36729.jpg&fm=jpg' },
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-                { commonName: 'Tulip', collection: 'flowers', imgUrl: 'https://images.pexels.com/photos/36729/tulip-flower-bloom-pink.jpg?cs=srgb&dl=pexels-pixabay-36729.jpg&fm=jpg' },
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-                { commonName: 'Tulip', collection: 'flowers', imgUrl: 'https://images.pexels.com/photos/36729/tulip-flower-bloom-pink.jpg?cs=srgb&dl=pexels-pixabay-36729.jpg&fm=jpg' },
-                { commonName: 'Rose', collection: 'flowers', imgUrl: 'https://helloartsy.com/wp-content/uploads/kids/flowers/how_to_draw_a_rose_for_beginners/how-to-draw-a-rose-for-beginners_step-6.jpg' },
-            ]
-        },
-    ];
-
-    return mockData;
-}
-
-async function fetchLayoutsByUsername(username) {
-    const layouts = await fetchAllLayouts();
-    return layouts.filter(layout => layout.username === username);
 }
