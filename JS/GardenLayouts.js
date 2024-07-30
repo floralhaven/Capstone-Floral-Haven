@@ -4,7 +4,7 @@ document.getElementById('clear-button').addEventListener('click', clearSearch);
 
 // const baseUrl = "https://chelseabui11.github.io/Capstone-Floral-Haven-API/";
 const baseUrl = 'http://localhost:3000/';
-const currentUser = { username: 'currentUsernameHere' };
+const currentUser = sessionStorage.getItem('loggedInUser') || 'Guest Account';
 
 async function loadAllLayouts() {
     const layouts = await fetchAllLayouts();
@@ -94,7 +94,7 @@ function displayLayouts(layouts, username = '') {
         postCommentButton.addEventListener('click', () => {
             const comment = commentInput.value.trim();
             if (comment) {
-                saveComment(layout.username, layout.layoutName, currentUser.username, comment);
+                saveComment(layout.username, layout.layoutName, currentUser, comment);
                 commentInput.value = ''; // Clear the input after saving the comment
             } else {
                 alert('Please enter a comment.');
@@ -121,11 +121,6 @@ function displayLayouts(layouts, username = '') {
 }
 
 async function saveComment(layoutOwner, layoutName, username, comment) {
-    console.log("Layout Owner:", layoutOwner);
-    console.log("Layout Name:", layoutName);
-    console.log("Username:", username);
-    console.log("Comment:", comment);
-
     try {
         const response = await fetch(`${baseUrl}comments`, {
             method: 'POST',
