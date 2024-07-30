@@ -50,6 +50,12 @@ button {
     font-weight: bold;
 }
 
+.logoutbtn, .settingsbtn, .commentsbtn {
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+}
+
 .btn,
 .contact-form button,
 .signup-form button,
@@ -287,23 +293,29 @@ button {
 /*Garden Layouts page*/
 #search-bar {
     padding: 10px;
-    width: 200px;
-    margin-right: 10px;
+    width: 250px;
+    margin-top: 5%;
+    margin-left:15%;
 }
 
 #search-button {
     padding: 10px;
+    margin-left: 15%;
+    margin-right: 5%;
 }
 
 #layouts-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 20px;
+    margin-top:1%;
+    margin-left: 12%;
+    margin-bottom:5%;
+    gap: 15px;
 }
 
 .layout-card {
-    border: 1px solid #ccc;
+    border: #272001 2px solid;
     padding: 10px;
     width: 300px;
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
@@ -325,20 +337,9 @@ button {
     height: 80%;
 }
 
-/* Garden Layout CSS */
 .GardenLayout{
     display: grid;
     justify-content: center;
-}
-
-#search-bar {
-    padding: 10px;
-    width: 300px;
-    margin-right: 10px;
-}
-
-#search-button {
-    padding: 10px;
 }
 
 .Garden-container {
@@ -379,7 +380,6 @@ button {
 }
 
 .layout-card {
-    margin: 10px 10px; 
     padding: 10px;
     border: #272001 2px solid;
     border-radius: 5px;
@@ -391,19 +391,37 @@ button {
     color:#DCDCDC
 }
 
-.comment-button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #646536;
-    border: #272001 2px solid;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+/*Comment section for Garden Layouts*/
+.comment-section {
+    margin-top: 20px;
+    padding-top: 10px;
 }
 
-.comment-button:hover {
-    background-color: #818262;
+.comment-input {
+    width: 90%;
+    min-height: 50px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px solid #272001;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.post-comment-button {
+    background-color: #646536;
+    color:#DCDCDC;
+    margin-bottom: 10px;
+    margin-left: 23%;
+}
+
+.comment-list {
+    margin-top: 10px;
+}
+
+.comment-item {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 2px solid #272001;
 }
 
 /* Main Content */
@@ -553,11 +571,6 @@ button {
 
 .logoutbtn{
     margin-bottom: 5px;
-}
-
-.logoutbtn, .settingsbtn {
-    width: 100px;
-    font-size: 20px;
 }
 
 /* Footer Styles */

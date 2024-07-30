@@ -33,13 +33,15 @@
             <span id="loginLink"><a href="Login.html"><button class="btn">Login</button></a></span>
             <br>
             <span id="guestProfileLink" style="display:none;"><a href="guestprofile.html"><button class="btn">Guest Profile</button></a></span>
-        </nav>    
+        </nav>
     </aside>
 
     <div class="profile">
-        <button class="logoutbtn" id="logoutbtn">log out</button>
-        <a href="Settings.html"><button class="settingsbtn" id="settingsbtn">Settings</button></a>
-        <br />
+        <div class="Profilebtns">
+            <button class="logoutbtn" id="logoutbtn">log out</button>
+            <a href="Settings.html"><button class="settingsbtn" id="settingsbtn">Settings</button></a>
+            <a href="Comments.html"><button class="commentsbtn" id="commentsbtn">Comments</button></a>
+        </div>
 
         <div class="garden-planner">
             <label for="collection-select">Collection:</label>
@@ -54,7 +56,7 @@
             <label for="plant-name">Plant Name:</label>
             <input type="text" id="plant-name">
             <button id="addPlantButton">Add Plant</button>
-            <p>In order to delete a plant click on the image you want to remove. 
+            <p>In order to delete a plant click on the image you want to remove.
                 Warning it will delete the images before it!</p>
 
             <label for="layoutname">Layout Name:</label>

@@ -1,4 +1,3 @@
-
 let grid = Array(3).fill().map(() => Array(3).fill(''));
 
 // Event listeners set up when the DOM content is fully loaded
