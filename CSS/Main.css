@@ -216,7 +216,7 @@ button {
     flex-direction: column;
     text-align: center;
     margin-top: -30%;
-    margin-bottom: 90%;
+    margin-bottom: 99%;
     font-size: 20px;
     height: 100px;
 }
@@ -410,18 +410,23 @@ button {
 .post-comment-button {
     background-color: #646536;
     color:#DCDCDC;
+    height: 50px;
     margin-bottom: 10px;
     margin-left: 23%;
 }
 
 .comment-list {
     margin-top: 10px;
+    height: 80px;
+    overflow-y: scroll;
 }
 
 .comment-item {
     margin-bottom: 10px;
     padding: 5px;
-    border: 2px solid #272001;
+    color:#DCDCDC;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 /* Main Content */

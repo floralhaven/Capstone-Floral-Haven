@@ -151,8 +151,8 @@ async function loadComments(layoutOwner, layoutName, commentList) {
         const comments = await response.json();
         comments.forEach(comment => {
             const commentItem = document.createElement('div');
-            commentItem.className = 'comment-item';
-            commentItem.textContent = comment.commentText; // assuming comment object has a 'commentText' property
+            commentItem.className = 'comment-item'
+            commentItem.textContent = comment.username +`: `+ comment.commentText;
             commentList.appendChild(commentItem);
         });
     } else {
