@@ -11,6 +11,7 @@ html {
     padding: 0;
     background-color: #DCDCDC;
     font-family: "Neucha", cursive;
+    overflow-x: hidden;
 }
 
 button {
@@ -308,9 +309,9 @@ button {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top:1%;
-    margin-left: 12%;
-    margin-bottom:5%;
+    margin-top: 2%;    
+    margin-left: 11%;
+    margin-bottom: 2%;
     gap: 15px;
 }
 
