@@ -1,63 +1,74 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Floral Haven - Guest Profile</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="keywords" content="pollinators, bees, bats, butterflies, plants">
-        <link rel="stylesheet" href="CSS/Main.css">
-        <link rel="icon" type="image/x-icon" href="Images/Icon.png">
-    </head>
 
-    <body>
-        <aside class="navbar">
-            <nav>
-                <a href="index.html"><img src="Images/logo.png" alt="Floral Haven Logo"></a>
-                <br>
-                <a href="Bat.html"><button class="btn">Bats</button></a>
-                <br>
-                <a href="Butterfly.html"><button class="btn">Butterflies</button></a>
-                <br>
-                <a href="Bee.html"><button class="btn">Bees</button></a>
-                <br>
-                <a href="Hummingbird.html"><button class="btn">Hummingbirds</button></a>
-                <br>
-                <a href="GardenLayouts.html"><button class="btn">Garden Layouts</button></a>
-                <br>
-                <a href="Contactus.html"><button class="btn">Contact Us</button></a>
-                <br>
-                <span id="profileLink" style="display:none;"><a href="Profile.html"><button class="btn">Profile</button></a></span>
-                <span id="signupLink"><a href="Signup.html"><button class="btn">Sign up</button></a></span>
-                <br>
-                <span id="loginLink"><a href="Login.html"><button class="btn">Login</button></a></span>
-                <br>
-                <span id="guestProfileLink" style="display:none;"><a href="guestprofile.html"><button class="btn">Guest Profile</button></a></span>
-            </nav>    
-        </aside>
+<head>
+    <title>Floral Haven - Guest Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="pollinators, bees, bats, butterflies, plants">
+    <link rel="stylesheet" href="CSS/Main.css">
+    <link rel="icon" type="image/x-icon" href="Images/Icon.png">
+</head>
 
-        <div class="profile">
-            <h1>Guest Profile</h1>
+<body>
+    <aside class="navbar">
+        <nav>
+            <a href="index.html"><img src="Images/logo.png" alt="Floral Haven Logo"></a>
+            <br>
+            <a href="Bat.html"><button class="btn">Bats</button></a>
+            <br>
+            <a href="Butterfly.html"><button class="btn">Butterflies</button></a>
+            <br>
+            <a href="Bee.html"><button class="btn">Bees</button></a>
+            <br>
+            <a href="Hummingbird.html"><button class="btn">Hummingbirds</button></a>
+            <br>
+            <a href="GardenLayouts.html"><button class="btn">Garden Layouts</button></a>
+            <br>
+            <a href="Contactus.html"><button class="btn">Contact Us</button></a>
+            <br>
+            <span id="profileLink" style="display:none;"><a href="Profile.html"><button
+                        class="btn">Profile</button></a></span>
+            <span id="signupLink"><a href="Signup.html"><button class="btn">Sign up</button></a></span>
+            <br>
+            <span id="loginLink"><a href="Login.html"><button class="btn">Login</button></a></span>
+            <br>
+            <span id="guestProfileLink" style="display:none;"><a href="guestprofile.html"><button class="btn">Guest
+                        Profile</button></a></span>
+        </nav>
+    </aside>
 
-            <h2>You are in a guest account Have full access to the garden planner and other sections of Floral Haven please Sign up or Log in! </h2>
-            <div class="garden-planner">
-                <label for="collection-select">Choose a collection:</label>
-                <select id="collection-select">
-                    <option value="bats">Bats</option>
-                    <option value="bees">Bees</option>
-                    <option value="butterflies">Butterflies</option>
-                    <option value="hummingbirds">Hummingbirds</option>
-                </select>
-                <br/>
-    
-                <label for="plant-name">Enter plant name:</label>
-                <input type="text" id="plant-name">
-                <button id="addPlantButton">Add Plant</button>
-                <br/>
-                
-                <button id="saveLayoutButton">Save Layout</button>
-    
-                <div id="plant-grid" class="grid-container">
-                    <!-- Grid cells -->
+    <div class="guestprofile">
+        <h1>Guest Profile</h1>
+
+        <h2>You are in a guest account Have full access to the garden planner and other sections of Floral Haven please
+            Sign up or Log in! </h2>
+        <div class="garden-planner">
+            <label for="collection-select">Collection:</label>
+            <select id="collection-select">
+                <option value="bees">Bees</option>
+                <option value="bats">Bats</option>
+                <option value="butterflies">Butterflies</option>
+                <option value="hummingbirds">Hummingbirds</option>
+            </select>
+            <br>
+
+            <label for="plant-name">Plant Name:</label>
+            <input type="text" id="plant-name">
+            <button id="addPlantButton">Add Plant</button>
+            <p>In order to delete a plant click on the image you want to remove.
+                Warning it will delete the images before it!</p>
+
+            <label for="layoutname">Layout Name:</label>
+            <input type="text" id="layout-name">
+            <button id="saveLayoutButton">Save Layout</button>
+            <button id="clearLayoutButton">Clear Grid</button>
+
+            <p class="favorites">Favorite Plants</p>
+            <div class="Gridplants">
+                <div class="likedplants"></div>
+
+                <div class="grid-container" id="garden-grid">
                     <div class="grid-item" data-row="0" data-col="0"></div>
                     <div class="grid-item" data-row="0" data-col="1"></div>
                     <div class="grid-item" data-row="0" data-col="2"></div>
@@ -68,17 +79,20 @@
                     <div class="grid-item" data-row="2" data-col="1"></div>
                     <div class="grid-item" data-row="2" data-col="2"></div>
                 </div>
-                <br/>
-                <h3>Your Layouts</h3>
-                <div id="layouts"></div>
             </div>
-        </div>
-        </div>
 
-        <footer class="non-infofooter">
-            <p>© Floral Haven. All rights are reserved.<p>
-        </footer>
-        <script src="JS/nav.js"></script>
-        <script src="JS/garden-planner.js"></script>
-    </body>    
+            <h3>Click on one of your layouts below and it will pop up in the grid above!</h3>
+            <div id="saved-layouts" class="saved-layouts"></div>
+        </div>
+    </div>
+
+
+    <footer class="non-infofooter">
+        <p>© Floral Haven. All rights are reserved.
+        <p>
+    </footer>
+    <script src="JS/nav.js"></script>
+    <script src="JS/garden-planner.js"></script>
+</body>
+
 </html>

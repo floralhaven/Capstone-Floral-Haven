@@ -1,22 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
 
 /* General Styles */
-body,
-html {
-    height: 100%;
+body, html {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: #DCDCDC;
-    font-family: "Neucha", cursive;
     overflow-x: hidden;
-}
-
-button {
-    padding: 0;
-    width: 160px;
+    height: 100%;
+    min-height: 100vh;
+    background-color: #DCDCDC;
     font-family: "Neucha", cursive;
 }
 
@@ -41,35 +34,16 @@ button {
 }
 
 /* Button Styles */
-.unfavorite-btn{
-    background-color: #8ab495;
-    border: 2px solid #272001;
-    padding: 5px;
-    color: #272001;
-    font-size: 15px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.logoutbtn, .settingsbtn, .commentsbtn {
-    width: 100px;
-    height: 40px;
-    font-size: 20px;
-}
-
 .btn,
 .contact-form button,
 .signup-form button,
 .login-form button,
-.profile button {
+.profile button,
+.guestprofile button {
     background-color: #646536;
     color: #DCDCDC;
     border: 2px solid #272001;
     cursor: pointer;
-}
-
-.profile button {
-    width: 100px;
 }
 
 .btn {
@@ -80,16 +54,9 @@ button {
     font-size: 20px;
 }
 
-.buttons{
+.glbtn {
     display: flex;
     flex-direction: row;
-}
-
-.buttons button{
-    background-color: #646536;
-    border: 2px solid #272001;
-    color:#DCDCDC;
-    font-size: 20px;
 }
 
 .contact-form button,
@@ -103,7 +70,8 @@ button {
 .contact-form button:hover,
 .signup-form button:hover,
 .login-form button:hover,
-.profile button:hover {
+.profile button:hover,
+.guestprofile button:hover {
     background-color: #818262;
 }
 
@@ -136,11 +104,21 @@ button {
     opacity: 0;
 }
 
-.add-fav input[type="checkbox"]:checked+.icon-heart {
+.add-fav input[type="checkbox"]:checked + .icon-heart {
     color: #722b43;
 }
 
-/* Message Section */
+.unfavorite-btn {
+    background-color: #8ab495;
+    border: 2px solid #272001;
+    padding: 5px;
+    color: #272001;
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Home Page Styles */
 .message {
     width: 700px;
     height: 500px;
@@ -160,289 +138,11 @@ button {
     font-weight: bold;
 }
 
-/* Plant Container and Card Styles */
-.plant-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: calc(250px * 5 + 40px * 4);
-    /* 5 cards and 4 gaps */
-    margin-left: 200px;
-    /* Centering the container */
-    padding: 20px;
-    gap: 30px;
-}
-
-.card {
-    flex: 0 1 230px;
-    /* Fixing card width */
-    height: 55vh;
-    text-align: center;
-    justify-content: center;
-    padding: 10px;
-    font-size: 18px;
-    background-color: #6F9479;
-    border: 2px solid #272001;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.card img {
-    width: 100%;
-    height: 40%;
-    margin-top: 10px;
-}
-
-.favorites{
-    font-size: 30px;
-    margin-bottom: -1%;
-}
-
-.likedplants{
-    display: grid;
-    grid-template-columns: 130px 130px;
-    gap: 16px;
-    width: 50%;
-    height: 195px;
-    padding: 25px;
-    margin-top: 10px;
-    margin-right: 10px;
-    background-color: #646536;
-    border: 2px solid #272001;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-.likedplant{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin-top: -30%;
-    margin-bottom: 99%;
-    font-size: 20px;
-    height: 100px;
-}
-
-.likedplant img{
-    margin-top: -20px;
-    margin-bottom: 1px;
-    width: 30%;
-    height: 30%;
-}
-
-/* Garden Planner */
-.grid-container {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(3, 0fr);
-    margin-top: 10px;
-}
-
-.grid-item {
-    width: 80px;
-    height: 80px;
-    border: #272001 2px solid;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.grid-plant {
-    max-width: 100%;
-    max-height: 100%;
-}
-
-.garden-planner {
-    border: #272001 2px solid;
-    width: 600px;
-    padding: 10px;
-}
-
-.garden-planner img {
-    width: 100%;
-    height: 100%;
-}
-
-.garden-planner label {
-    margin-left: 10px;
-}
-
-.Gridplants{
-    display: flex;
-}
-
-/* Make the saved-layouts section horizontally scrollable */
-.saved-layouts {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 10px;
-    margin-top: 10px;
-}
-
-.saved-layout {
-    display: inline-block;
-    padding: 5px;
-    border: 2px solid #272001;
-    background-color: #646536;
-    margin-right: 10px;
-}
-
-.saved-layout:hover {
-    background-color: #8e8f61;
-}
-
-/*Garden Layouts page*/
-#search-bar {
-    padding: 10px;
-    width: 250px;
-    margin-top: 5%;
-    margin-left:15%;
-}
-
-#search-button {
-    padding: 10px;
-    margin-left: 15%;
-    margin-right: 5%;
-}
-
-#layouts-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 2%;    
-    margin-left: 11%;
-    margin-bottom: 2%;
-    gap: 15px;
-}
-
-.layout-card {
-    border: #272001 2px solid;
-    padding: 10px;
-    width: 300px;
-    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-.layout-card h3, .layout-card h4 {
-    margin: 0 0 10px;
-}
-
-.grid {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.grid img {
-    width: 80%;
-    height: 80%;
-}
-
-.GardenLayout{
-    display: grid;
-    justify-content: center;
-}
-
-.Garden-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.Garden-item {
-    width: 80px;
-    height: 80px;
-    border: #272001 2px solid;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.Garden-item img {
-    width: 100%;
-    height:100%;
-}
-
-.Garden-item .tooltip {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 2px 5px;
-    font-size: 10px;
-    display: none; 
-}
-
-.Garden-item:hover .tooltip {
-    display: block; 
-}
-
-.layout-card {
-    padding: 10px;
-    border: #272001 2px solid;
-    border-radius: 5px;
-    background-color: #6F9479;
-}
-
-.layout-card h3, .layout-card h4 {
-    margin: 5px 0;
-    color:#DCDCDC
-}
-
-/*Comment section for Garden Layouts*/
-.comment-section {
-    margin-top: 20px;
-    padding-top: 10px;
-}
-
-.comment-input {
-    width: 90%;
-    min-height: 50px;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 2px solid #272001;
-    border-radius: 5px;
-    resize: vertical;
-}
-
-.post-comment-button {
-    background-color: #646536;
-    color:#DCDCDC;
-    height: 50px;
-    margin-bottom: 10px;
-    margin-left: 23%;
-}
-
-.comment-list {
-    margin-top: 10px;
-    height: 80px;
-    overflow-y: scroll;
-}
-
-.comment-item {
-    margin-bottom: 10px;
-    padding: 5px;
-    color:#DCDCDC;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* Main Content */
-.main-content {
-    flex: 1;
-    margin-left: 220px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Form Styles */
+/* Forms and Profile Styles */
 .contact-form,
 .signup-form,
-.profile {
+.profile,
+.guestprofile {
     display: flex;
     flex-direction: column;
     padding: 15px;
@@ -455,23 +155,24 @@ button {
 
 .contact-form {
     width: 650px;
-    margin-top: 130px;
+    margin-top: 8.2%;
     margin-left: 590px;
-    margin-bottom: 140px;
+    margin-bottom: 8.1%;
 }
 
 .signup-form {
     width: 400px;
-    margin-top: 155px;
+    margin-top: 8.05%;
     margin-left: 690px;
-    margin-bottom: 112px;
+    margin-bottom: 8.05%;
 }
 
 .login-form {
     width: 350px;
-    margin-top: 251px;
+    height: 340px;
+    margin-top: 13.99%;
     margin-left: 690px;
-    margin-bottom: 251px;
+    margin-bottom: 14%;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     font-size: large;
@@ -513,13 +214,26 @@ button {
     margin-bottom: 10px;
 }
 
-.profile {
+.profile{
     width: 620px;
     height: 770px;
     margin-top: 22.5px;
     margin-left: 600px;
     margin-bottom: 22.5px;
     font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.guestprofile {
+    width: 620px;
+    height: 770px;
+    margin-top: 22.5px;
+    margin-left: 600px;
+    margin-bottom: 22.5px;
+    font-size: 17px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -579,6 +293,273 @@ button {
     margin-bottom: 5px;
 }
 
+/* Plant Container and Card Styles */
+.plant-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: calc(250px * 5 + 40px * 4);
+    margin-left: 200px;
+    padding: 20px;
+    gap: 30px;
+}
+
+.card {
+    flex: 0 1 230px;
+    height: 55vh;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 18px;
+    background-color: #6F9479;
+    border: 2px solid #272001;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 40%;
+    margin-top: 10px;
+}
+
+.favorites {
+    font-size: 30px;
+    margin-bottom: -1%;
+}
+
+.likedplants {
+    display: grid;
+    grid-template-columns: 130px 130px;
+    gap: 16px;
+    width: 50%;
+    height: 195px;
+    padding: 25px;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #646536;
+    border: 2px solid #272001;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.likedplant {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: -30%;
+    margin-bottom: 99%;
+    font-size: 20px;
+    height: 100px;
+}
+
+.likedplant img {
+    margin-top: -20px;
+    margin-bottom: 1px;
+    width: 30%;
+    height: 30%;
+}
+
+/* Garden Planner */
+.grid-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 10px;
+}
+
+.grid-item {
+    width: 80px;
+    height: 80px;
+    border: #272001 2px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-plant {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.garden-planner {
+    border: #272001 2px solid;
+    width: 600px;
+    padding: 10px;
+}
+
+.garden-planner img {
+    width: 100%;
+    height: 100%;
+}
+
+.garden-planner label {
+    margin-left: 10px;
+}
+
+.Gridplants {
+    display: flex;
+}
+
+/* Saved Layouts */
+.saved-layouts {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.saved-layout {
+    display: inline-block;
+    padding: 5px;
+    border: 2px solid #272001;
+    background-color: #646536;
+    margin-right: 10px;
+}
+
+.saved-layout:hover {
+    background-color: #8e8f61;
+}
+
+/* Garden Layouts Page */
+#search-bar {
+    padding: 10px;
+    width: 250px;
+    margin-top: 5%;
+    margin-left: 15%;
+}
+
+#search-button {
+    padding: 10px;
+    margin-left: 15%;
+    margin-right: 5%;
+}
+
+#layouts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2%;
+    margin-left: 11%;
+    margin-bottom: 2%;
+    gap: 15px;
+}
+
+.layout-card {
+    border: #272001 2px solid;
+    padding: 10px;
+    width: 300px;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border-radius: 5px;
+    background-color: #6F9479;
+}
+
+.layout-card h3, .layout-card h4 {
+    margin: 0 0 10px;
+    color: #DCDCDC;
+}
+
+.grid {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid img {
+    width: 80%;
+    height: 80%;
+}
+
+.GardenLayout {
+    display: grid;
+    justify-content: center;
+}
+
+.Garden-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.Garden-item {
+    width: 80px;
+    height: 80px;
+    border: #272001 2px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.Garden-item img {
+    width: 100%;
+    height: 100%;
+}
+
+.Garden-item .tooltip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 2px 5px;
+    font-size: 10px;
+    display: none;
+}
+
+.Garden-item:hover .tooltip {
+    display: block;
+}
+
+/* Comment Section */
+.comment-section {
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+.comment-input {
+    width: 90%;
+    min-height: 50px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px solid #272001;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.post-comment-button {
+    background-color: #646536;
+    color: #DCDCDC;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-left: 23%;
+}
+
+.comments-container {
+    border: 2px solid #272001;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #6F9479;
+}
+
+.comment {
+    border: 2px solid #272001;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.comment h5 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.comment p {
+    margin: 5px 0 0;
+}
+
 /* Footer Styles */
 .non-infofooter {
     margin-left: 200px;
@@ -606,6 +587,7 @@ footer {
     padding-left: 5px;
 }
 
+/* Responsive Styles */
 /* Styles for screens under 1000px */
 @media screen and (max-width:1600px) and (min-width: 1000px) {
     .plant-container {
@@ -760,7 +742,6 @@ footer {
         font-size: 14px;
         overflow-y: scroll;
         max-height: 400px;
-        /* Limit the card height */
     }
 
     .card img {
