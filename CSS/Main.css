@@ -436,11 +436,11 @@ body, html {
 }
 
 #layouts-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     justify-content: center;
+    grid-template-columns: repeat(3, 0fr);
     margin-top: 2%;
-    margin-left: 11%;
+    margin-left: 15%;
     margin-bottom: 2%;
     gap: 15px;
 }
@@ -595,6 +595,31 @@ footer {
 }
 
 /* Responsive Styles */
+/*Style for devices between 1026px and 1218px */
+@media (max-width:1218px){
+
+#layouts-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 0fr);
+    margin-top: 2%;
+    margin-left: 15%;
+    margin-bottom: 2%;
+    gap: 1px;
+}
+
+.layout-card {
+    border: #272001 2px solid;
+    padding: 10px;
+    width: 300px;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border-radius: 5px;
+    background-color: #6F9479;
+}
+
+}
+
 /* Styles for tablets (typically between 768px and 1024px) */
 @media (max-width: 1024px) {
     .navbar {
@@ -621,8 +646,9 @@ footer {
     }
 
     .message {
-        width: 60%;
+        width: 80%;
         padding: 10px;
+        margin-left: 10%;
         font-size: 24px;
     }
 
@@ -664,12 +690,12 @@ footer {
     }
 
     .profile{
-        margin-left: 70px;
+        margin-left: 11%;
     }
 
     .Settings{
         margin-top: 50px;
-        margin-left: 200px;
+        margin-left: 23%;
         margin-bottom: 50px;
         width: 350px;
     }
