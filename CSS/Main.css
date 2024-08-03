@@ -560,6 +560,13 @@ body, html {
     margin: 5px 0 0;
 }
 
+.comment-list{
+    height: 70px;
+    overflow-y: scroll;
+    color:#DCDCDC;
+    font-size: 20px;
+}
+
 /* Footer Styles */
 .non-infofooter {
     margin-left: 200px;
@@ -614,8 +621,8 @@ footer {
     }
 
     .message {
-        width: 70%;
-        margin: 30px 100px 30px;
+        width: 60%;
+        margi;
         padding: 10px;
         font-size: 24px;
     }
@@ -747,20 +754,19 @@ footer {
 
     .message {
         width: 80%;
-        margin: 60px 70px 10px;
+        margin: 8%;
         padding: 10px;
         font-size: 18px;
     }
 
     .plant-container {
         max-width: 100%;
-        margin-left: 0;
         padding: 10px;
     }
 
     .card {
-        flex: 0 1 35%;
-        height: 3.2%;
+        flex: 0 43%;
+        height: 3.6%;
     }
 
     .likedplants {
@@ -799,30 +805,36 @@ footer {
 
     .likedplants {
         width: 50%;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 0fr);
+        justify-content: center;
+    }
+
+    .likedplant{
+        margin-top: 1%;
     }
 
     .contact-form{
+        margin-left: 8%;
         width: 450px;
     }
 
     .signup-form{
-        margin-left: 10px;
+        margin-left: 13%;
     }
 
     .login-form{
-        margin-left: 200px;
+        margin-left: 15%;
     }
 
     .guestprofile{
         margin-left: 40px;
         height: 1000px;
-        width: 700px;
+        width: 480px;
     }
 
     .profile{
-        width: 60%;
-        margin-left: 10%;
+        width: 85%;
+        margin-left: 5%;
     }
 
     .Settings{
@@ -849,6 +861,13 @@ footer {
         height: 80px;
     }
     
+    .glbtn{
+        margin-left: -15%;
+    }
+
+    #search-bar{
+        margin-left: 2%;
+    }
 
     .Garden-item:hover .tooltip {
         position: absolute;
