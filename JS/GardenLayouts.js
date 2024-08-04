@@ -137,6 +137,10 @@ async function saveComment(layoutOwner, layoutName, username, comment) {
 
         if (response.ok) {
             console.log('Comment added successfully!');
+            // Add the comment to the comment list without refreshing the page
+            const newComment = await response.json();
+            const commentList = document.querySelector(`#comment-list-${layoutOwner}-${layoutName}`);
+            addCommentToList(newComment.username, newComment.commentText, commentList);
         } else {
             console.log('Failed to add comment. Please try again.');
         }
@@ -145,16 +149,24 @@ async function saveComment(layoutOwner, layoutName, username, comment) {
     }
 }
 
+function addCommentToList(username, comment, commentList) {
+    const commentItem = document.createElement('div');
+    commentItem.className = 'comment-item';
+    commentItem.textContent = `${username}: ${comment}`;
+    commentList.appendChild(commentItem);
+}
+
 async function loadComments(layoutOwner, layoutName, commentList) {
     const response = await fetch(`${baseUrl}comments?layoutOwner=${layoutOwner}&layoutName=${layoutName}`);
     if (response.ok) {
         const comments = await response.json();
         comments.forEach(comment => {
             const commentItem = document.createElement('div');
-            commentItem.className = 'comment-item'
-            commentItem.textContent = comment.username +`: `+ comment.commentText;
+            commentItem.className = 'comment-item';
+            commentItem.textContent = `${comment.username}: ${comment.commentText}`;
             commentList.appendChild(commentItem);
         });
+        commentList.id = `comment-list-${layoutOwner}-${layoutName}`; // Set a unique ID
     } else {
         console.error('Failed to load comments');
     }
