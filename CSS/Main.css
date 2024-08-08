@@ -567,6 +567,23 @@ body, html {
     font-size: 20px;
 }
 
+/* Partnership Styles */
+.PartnershipsGrid{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 0fr);
+    margin-top: 2%;
+    margin-right: 5.5%;
+    margin-bottom: 2%;
+}
+
+.Partnerships{
+    margin-top: 40px;
+    margin-left: 300px;
+    width: 500px;
+    height: 500px;
+}
+
 /* Footer Styles */
 .non-infofooter {
     margin-left: 200px;
