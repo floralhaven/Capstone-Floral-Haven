@@ -1,52 +1,31 @@
 const baseUrl = "https://floralhaven.github.io/Capstone-Floral-Haven-API/";
 
 document.addEventListener('DOMContentLoaded', () => {
-    const pageTitle = document.title.toLowerCase();
-    if (pageTitle.includes('hummingbirds')) {
-        loadHummingbirds();
-    } else if (pageTitle.includes('bees')) {
-        loadBees();
-    } else if (pageTitle.includes('bats')) {
-        loadBats();
-    } else if (pageTitle.includes('butterflies')) {
-        loadButterflies();
+    const category = document.title.toLowerCase().includes('hummingbirds') ? 'hummingbirds' :
+        document.title.toLowerCase().includes('bees') ? 'bees' :
+            document.title.toLowerCase().includes('bats') ? 'bats' :
+                document.title.toLowerCase().includes('butterflies') ? 'butterflies' : '';
+
+    if (category) {
+        fetchData(category).then(data => {
+            populateCards(data, category);
+        }).catch(error => {
+            console.error('Error fetching data:', error);
+        });
     }
 });
 
-function loadHummingbirds() {
-    fetchData('hummingbirds')
-        .then(data => populateCards(data, 'hummingbirds'))
-        .catch(error => console.error('Error fetching hummingbirds data:', error));
-}
-
-function loadBees() {
-    fetchData('bees')
-        .then(data => populateCards(data, 'bees'))
-        .catch(error => console.error('Error fetching bees data:', error));
-}
-
-function loadBats() {
-    fetchData('bats')
-        .then(data => populateCards(data, 'bats'))
-        .catch(error => console.error('Error fetching bats data:', error));
-}
-
-function loadButterflies() {
-    fetchData('butterflies')
-        .then(data => populateCards(data, 'butterflies'))
-        .catch(error => console.error('Error fetching butterflies data:', error));
-}
-
 async function fetchData(category) {
+    const url = `${baseUrl}data/${category}`;
     try {
-        const response = await fetch(`${baseUrl}data/${category}`);
+        const response = await fetch(url);
         if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText}`);
+            throw new Error(`Network response was not ok: ${response.statusText} (Status: ${response.status})`);
         }
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error('There has been a problem with your fetch operation:', error);
+        console.error(`Error fetching data from ${url}:`, error);
         return null;
     }
 }
@@ -67,6 +46,15 @@ function populateCards(dataArray, collection) {
         cardContainer.appendChild(card);
     });
 }
+
+// Example Usage
+fetchData('bats').then(data => {
+    if (data) {
+        populateCards(data, 'bats');
+    } else {
+        console.error('No data returned for bats');
+    }
+});
 
 function createCard(data, collection) {
     const card = document.createElement('div');
