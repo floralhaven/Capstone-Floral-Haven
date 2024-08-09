@@ -16,45 +16,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function fetchData(category) {
-    const url = `${baseUrl}data/${category}`;
     try {
-        const response = await fetch(url);
+        const response = await fetch(`${baseUrl}data/${category}`);
         if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText} (Status: ${response.status})`);
+            throw new Error(`Network response was not ok: ${response.statusText}`);
         }
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error(`Error fetching data from ${url}:`, error);
-        return null;
+        console.error('There has been a problem with your fetch operation:', error);
     }
 }
 
 function populateCards(dataArray, collection) {
     const cardContainer = document.getElementById('plant-container');
     cardContainer.innerHTML = ''; // Clear existing cards
-
-    if (!dataArray || dataArray.length === 0) {
-        const noDataMessage = document.createElement('p');
-        noDataMessage.textContent = 'No data available.';
-        cardContainer.appendChild(noDataMessage);
-        return;
-    }
-
     dataArray.forEach(data => {
         const card = createCard(data, collection);
         cardContainer.appendChild(card);
     });
 }
-
-// Example Usage
-fetchData('bats').then(data => {
-    if (data) {
-        populateCards(data, 'bats');
-    } else {
-        console.error('No data returned for bats');
-    }
-});
 
 function createCard(data, collection) {
     const card = document.createElement('div');
