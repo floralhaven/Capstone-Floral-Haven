@@ -1,19 +1,41 @@
 const baseUrl = "https://floralhaven.github.io/Capstone-Floral-Haven-API/";
 
 document.addEventListener('DOMContentLoaded', () => {
-    const category = document.title.toLowerCase().includes('hummingbirds') ? 'hummingbirds' :
-        document.title.toLowerCase().includes('bees') ? 'bees' :
-            document.title.toLowerCase().includes('bats') ? 'bats' :
-                document.title.toLowerCase().includes('butterflies') ? 'butterflies' : '';
-
-    if (category) {
-        fetchData(category).then(data => {
-            populateCards(data, category);
-        }).catch(error => {
-            console.error('Error fetching data:', error);
-        });
+    const pageTitle = document.title.toLowerCase();
+    if (pageTitle.includes('hummingbirds')) {
+        loadHummingbirds();
+    } else if (pageTitle.includes('bees')) {
+        loadBees();
+    } else if (pageTitle.includes('bats')) {
+        loadBats();
+    } else if (pageTitle.includes('butterflies')) {
+        loadButterflies();
     }
 });
+
+function loadHummingbirds() {
+    fetchData('hummingbirds')
+        .then(data => populateCards(data, 'hummingbirds'))
+        .catch(error => console.error('Error fetching hummingbirds data:', error));
+}
+
+function loadBees() {
+    fetchData('bees')
+        .then(data => populateCards(data, 'bees'))
+        .catch(error => console.error('Error fetching bees data:', error));
+}
+
+function loadBats() {
+    fetchData('bats')
+        .then(data => populateCards(data, 'bats'))
+        .catch(error => console.error('Error fetching bats data:', error));
+}
+
+function loadButterflies() {
+    fetchData('butterflies')
+        .then(data => populateCards(data, 'butterflies'))
+        .catch(error => console.error('Error fetching butterflies data:', error));
+}
 
 async function fetchData(category) {
     try {
@@ -25,7 +47,7 @@ async function fetchData(category) {
         return data;
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
-        return null; // Return null if there's an error
+        return null;
     }
 }
 
