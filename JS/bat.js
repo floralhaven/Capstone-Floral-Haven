@@ -25,12 +25,21 @@ async function fetchData(category) {
         return data;
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
+        return null; // Return null if there's an error
     }
 }
 
 function populateCards(dataArray, collection) {
     const cardContainer = document.getElementById('plant-container');
     cardContainer.innerHTML = ''; // Clear existing cards
+
+    if (!dataArray || dataArray.length === 0) {
+        const noDataMessage = document.createElement('p');
+        noDataMessage.textContent = 'No data available.';
+        cardContainer.appendChild(noDataMessage);
+        return;
+    }
+
     dataArray.forEach(data => {
         const card = createCard(data, collection);
         cardContainer.appendChild(card);
