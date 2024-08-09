@@ -1,5 +1,4 @@
-// const baseUrl = "https://floralhaven.github.io/Capstone-Floral-Haven-API/";
-const baseUrl = "http://localhost:3000/";
+const baseUrl = "https://floralhaven.github.io/Capstone-Floral-Haven-API/";
 
 document.addEventListener('DOMContentLoaded', () => {
     const category = document.title.toLowerCase().includes('hummingbirds') ? 'hummingbirds' :

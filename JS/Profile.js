@@ -1,5 +1,4 @@
-// const baseUrl = "https://floralhaven.github.io/Capstone-Floral-Haven-API/";
-const baseUrl = "http://localhost:3000/";
+const baseUrl = "https://floralhaven.github.io/Capstone-Floral-Haven-API/";
 
 document.addEventListener('DOMContentLoaded', function () {
     const logoutButton = document.getElementById('logoutbtn');
