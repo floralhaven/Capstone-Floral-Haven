@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', loadAllLayouts);
 document.getElementById('search-button').addEventListener('click', searchLayouts);
 document.getElementById('clear-button').addEventListener('click', clearSearch);
 
-const baseUrl = "https://floralhaven.github.io/Capstone-Floral-Haven-API/";
+const baseUrl = "http://localhost:3000/";
 
 const currentUser = sessionStorage.getItem('loggedInUser') || 'Guest Account';
 

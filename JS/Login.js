@@ -1,4 +1,4 @@
-const baseUrl = "https://floralhaven.github.io/Capstone-Floral-Haven-API/";
+const baseUrl = "http://localhost:3000/";
 
 document.getElementById('login-form').addEventListener('submit', function (event) {
     event.preventDefault();

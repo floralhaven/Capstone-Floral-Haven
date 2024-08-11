@@ -1,4 +1,4 @@
-const baseUrl = "https://floralhaven.github.io/Capstone-Floral-Haven-API/";
+const baseUrl = "http://localhost:3000/";
 
 document.addEventListener('DOMContentLoaded', function() {
     const formElement = document.getElementById('changePasswordForm');

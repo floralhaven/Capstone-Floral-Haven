@@ -13,6 +13,10 @@ body, html {
     font-family: "Neucha", cursive;
 }
 
+.backgroundimg{
+    background-image: url("../Images/background.png");
+    background-size: cover;
+}
 /* Navbar Styles */
 .navbar {
     position: fixed;
@@ -129,6 +133,7 @@ body, html {
     font-size: 30px;
     background-color: #6F9479;
     border: 2px solid #272001;
+    border-radius: 10px;
     color: #DCDCDC;
     text-align: center;
 }
