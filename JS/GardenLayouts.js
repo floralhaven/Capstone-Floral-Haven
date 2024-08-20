@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', loadAllLayouts);
 document.getElementById('search-button').addEventListener('click', searchLayouts);
 document.getElementById('clear-button').addEventListener('click', clearSearch);
 
-const baseUrl = "http://54.83.161.139:3000/";
+const baseUrl = "http://localhost:3000/";
 
 const currentUser = sessionStorage.getItem('loggedInUser') || 'Guest Account';
 

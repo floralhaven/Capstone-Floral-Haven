@@ -1,4 +1,4 @@
-const baseUrl = "https://54.83.161.139:3000/";
+const baseUrl = "http://localhost:3000/";
 
 document.addEventListener('DOMContentLoaded', () => {
     const category = document.title.toLowerCase().includes('hummingbirds') ? 'hummingbirds' :
