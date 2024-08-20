@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000/";
+const baseUrl = "http://54.83.161.139:3000/";
 
 document.getElementById('login-form').addEventListener('submit', function (event) {
     event.preventDefault();
