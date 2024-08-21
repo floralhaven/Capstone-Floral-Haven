@@ -1,5 +1,5 @@
 let grid = Array(3).fill().map(() => Array(3).fill(''));
-
+const baseUrl = "http://18.232.160.182:3000/";
 // Event listeners set up when the DOM content is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     fetchLayouts(); // Fetch existing layouts on page load
