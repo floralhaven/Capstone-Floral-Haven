@@ -1,4 +1,4 @@
-const baseUrl = "http://98.81.223.161:3000/";
+const baseUrl = "http://54.162.171.160:3000/";
 
 document.addEventListener('DOMContentLoaded', function () {
     const logoutButton = document.getElementById('logoutbtn');
