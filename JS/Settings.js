@@ -1,4 +1,4 @@
-const baseUrl = "http://18.232.160.182:3000/";
+const baseUrl = "http://localhost:3000/";
 
 document.addEventListener('DOMContentLoaded', function() {
     const formElement = document.getElementById('changePasswordForm');
